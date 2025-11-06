@@ -9,4 +9,5 @@ dependencies = [
     "django-adminlte3>=0.1.6",
     "psycopg2-binary>=2.9.11",
     "python-dotenv>=1.2.1",
+    "ruff>=0.14.3",
 ]
