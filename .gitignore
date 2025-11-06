@@ -11,3 +11,4 @@ wheels/
 
 # Ignorar arquivos de ambiente
 .env
+.ruff_cache

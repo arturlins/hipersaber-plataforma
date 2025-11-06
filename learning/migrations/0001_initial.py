@@ -6,101 +6,288 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('accounts', '0001_initial'),
+        ("accounts", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('public_id', models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, help_text='ID público para ser usado em URLs e APIs.', unique=True)),
-                ('title', models.CharField(help_text='Título do curso.', max_length=255)),
-                ('description', models.TextField(blank=True, help_text='Descrição detalhada do curso.', null=True)),
-                ('thumbnail_url', models.URLField(blank=True, help_text='URL para a imagem de capa (thumbnail).', max_length=255, null=True)),
-                ('audience', models.CharField(choices=[('student', 'Aluno'), ('guardian', 'Responsável')], default='student', help_text='Público-alvo do curso (Aluno ou Responsável).', max_length=10)),
-                ('published_at', models.DateTimeField(blank=True, help_text='Se nulo, o curso é um rascunho. Se preenchido, está visível.', null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "public_id",
+                    models.UUIDField(
+                        db_index=True,
+                        default=uuid.uuid4,
+                        editable=False,
+                        help_text="ID público para ser usado em URLs e APIs.",
+                        unique=True,
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(help_text="Título do curso.", max_length=255),
+                ),
+                (
+                    "description",
+                    models.TextField(
+                        blank=True, help_text="Descrição detalhada do curso.", null=True
+                    ),
+                ),
+                (
+                    "thumbnail_url",
+                    models.URLField(
+                        blank=True,
+                        help_text="URL para a imagem de capa (thumbnail).",
+                        max_length=255,
+                        null=True,
+                    ),
+                ),
+                (
+                    "audience",
+                    models.CharField(
+                        choices=[("student", "Aluno"), ("guardian", "Responsável")],
+                        default="student",
+                        help_text="Público-alvo do curso (Aluno ou Responsável).",
+                        max_length=10,
+                    ),
+                ),
+                (
+                    "published_at",
+                    models.DateTimeField(
+                        blank=True,
+                        help_text="Se nulo, o curso é um rascunho. Se preenchido, está visível.",
+                        null=True,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
-                'verbose_name': 'Curso',
-                'verbose_name_plural': 'Cursos',
+                "verbose_name": "Curso",
+                "verbose_name_plural": "Cursos",
             },
         ),
         migrations.CreateModel(
-            name='Module',
+            name="Module",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('public_id', models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, help_text='ID público para ser usado em URLs e APIs.', unique=True)),
-                ('title', models.CharField(help_text='Título do módulo.', max_length=255)),
-                ('module_order', models.IntegerField(help_text='Ordem do módulo dentro do curso (1, 2, 3...).')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('course', models.ForeignKey(help_text='Curso ao qual este módulo pertence.', on_delete=django.db.models.deletion.CASCADE, related_name='modules', to='learning.course')),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "public_id",
+                    models.UUIDField(
+                        db_index=True,
+                        default=uuid.uuid4,
+                        editable=False,
+                        help_text="ID público para ser usado em URLs e APIs.",
+                        unique=True,
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(help_text="Título do módulo.", max_length=255),
+                ),
+                (
+                    "module_order",
+                    models.IntegerField(
+                        help_text="Ordem do módulo dentro do curso (1, 2, 3...)."
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "course",
+                    models.ForeignKey(
+                        help_text="Curso ao qual este módulo pertence.",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="modules",
+                        to="learning.course",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Módulo',
-                'verbose_name_plural': 'Módulos',
-                'ordering': ['course', 'module_order'],
-                'unique_together': {('course', 'module_order')},
+                "verbose_name": "Módulo",
+                "verbose_name_plural": "Módulos",
+                "ordering": ["course", "module_order"],
+                "unique_together": {("course", "module_order")},
             },
         ),
         migrations.CreateModel(
-            name='Lesson',
+            name="Lesson",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('public_id', models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, help_text='ID público para ser usado em URLs e APIs.', unique=True)),
-                ('title', models.CharField(help_text='Título da lição.', max_length=255)),
-                ('lesson_order', models.IntegerField(help_text='Ordem da lição dentro do módulo (1, 2, 3...).')),
-                ('lesson_type', models.CharField(choices=[('video', 'Vídeo'), ('text', 'Texto'), ('quiz', 'Quiz')], default='video', max_length=10)),
-                ('content', models.TextField(blank=True, help_text="Conteúdo (usado se o tipo for 'Texto' ou 'Quiz').", null=True)),
-                ('video_url', models.URLField(blank=True, help_text="URL do vídeo (usado se o tipo for 'Vídeo').", max_length=255, null=True)),
-                ('duration_in_seconds', models.IntegerField(blank=True, help_text='Duração (em segundos) do vídeo ou tempo de leitura.', null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('module', models.ForeignKey(help_text='Módulo ao qual esta lição pertence.', on_delete=django.db.models.deletion.CASCADE, related_name='lessons', to='learning.module')),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "public_id",
+                    models.UUIDField(
+                        db_index=True,
+                        default=uuid.uuid4,
+                        editable=False,
+                        help_text="ID público para ser usado em URLs e APIs.",
+                        unique=True,
+                    ),
+                ),
+                (
+                    "title",
+                    models.CharField(help_text="Título da lição.", max_length=255),
+                ),
+                (
+                    "lesson_order",
+                    models.IntegerField(
+                        help_text="Ordem da lição dentro do módulo (1, 2, 3...)."
+                    ),
+                ),
+                (
+                    "lesson_type",
+                    models.CharField(
+                        choices=[
+                            ("video", "Vídeo"),
+                            ("text", "Texto"),
+                            ("quiz", "Quiz"),
+                        ],
+                        default="video",
+                        max_length=10,
+                    ),
+                ),
+                (
+                    "content",
+                    models.TextField(
+                        blank=True,
+                        help_text="Conteúdo (usado se o tipo for 'Texto' ou 'Quiz').",
+                        null=True,
+                    ),
+                ),
+                (
+                    "video_url",
+                    models.URLField(
+                        blank=True,
+                        help_text="URL do vídeo (usado se o tipo for 'Vídeo').",
+                        max_length=255,
+                        null=True,
+                    ),
+                ),
+                (
+                    "duration_in_seconds",
+                    models.IntegerField(
+                        blank=True,
+                        help_text="Duração (em segundos) do vídeo ou tempo de leitura.",
+                        null=True,
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "module",
+                    models.ForeignKey(
+                        help_text="Módulo ao qual esta lição pertence.",
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="lessons",
+                        to="learning.module",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Lição',
-                'verbose_name_plural': 'Lições',
-                'ordering': ['module', 'lesson_order'],
-                'unique_together': {('module', 'lesson_order')},
+                "verbose_name": "Lição",
+                "verbose_name_plural": "Lições",
+                "ordering": ["module", "lesson_order"],
+                "unique_together": {("module", "lesson_order")},
             },
         ),
         migrations.CreateModel(
-            name='Enrollment',
+            name="Enrollment",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('public_id', models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, help_text='ID público para ser usado em URLs e APIs.', unique=True)),
-                ('enrolled_at', models.DateTimeField(auto_now_add=True, help_text='Data em que o aluno se matriculou.')),
-                ('completed_at', models.DateTimeField(blank=True, help_text='Data em que o aluno completou o curso.', null=True)),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='enrollments', to='learning.course')),
-                ('student', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='enrollments', to='accounts.student')),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "public_id",
+                    models.UUIDField(
+                        db_index=True,
+                        default=uuid.uuid4,
+                        editable=False,
+                        help_text="ID público para ser usado em URLs e APIs.",
+                        unique=True,
+                    ),
+                ),
+                (
+                    "enrolled_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        help_text="Data em que o aluno se matriculou.",
+                    ),
+                ),
+                (
+                    "completed_at",
+                    models.DateTimeField(
+                        blank=True,
+                        help_text="Data em que o aluno completou o curso.",
+                        null=True,
+                    ),
+                ),
+                (
+                    "course",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="enrollments",
+                        to="learning.course",
+                    ),
+                ),
+                (
+                    "student",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="enrollments",
+                        to="accounts.student",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Matrícula',
-                'verbose_name_plural': 'Matrículas',
-                'unique_together': {('student', 'course')},
+                "verbose_name": "Matrícula",
+                "verbose_name_plural": "Matrículas",
+                "unique_together": {("student", "course")},
             },
         ),
         migrations.CreateModel(
-            name='LessonProgress',
+            name="LessonProgress",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('public_id', models.UUIDField(db_index=True, default=uuid.uuid4, editable=False, help_text='ID público para ser usado em URLs e APIs.', unique=True)),
-                ('completed_at', models.DateTimeField(auto_now_add=True, help_text='Data em que o aluno completou a lição.')),
-                ('lesson', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='progress_records', to='learning.lesson')),
-                ('student', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lesson_progress', to='accounts.student')),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "public_id",
+                    models.UUIDField(
+                        db_index=True,
+                        default=uuid.uuid4,
+                        editable=False,
+                        help_text="ID público para ser usado em URLs e APIs.",
+                        unique=True,
+                    ),
+                ),
+                (
+                    "completed_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        help_text="Data em que o aluno completou a lição.",
+                    ),
+                ),
+                (
+                    "lesson",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="progress_records",
+                        to="learning.lesson",
+                    ),
+                ),
+                (
+                    "student",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="lesson_progress",
+                        to="accounts.student",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Progresso de Lição',
-                'verbose_name_plural': 'Progressos de Lições',
-                'unique_together': {('student', 'lesson')},
+                "verbose_name": "Progresso de Lição",
+                "verbose_name_plural": "Progressos de Lições",
+                "unique_together": {("student", "lesson")},
             },
         ),
     ]
