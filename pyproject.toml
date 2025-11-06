@@ -1,0 +1,12 @@
+[project]
+name = "hipersaber-plataforma"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django>=5.2.8",
+    "django-adminlte3>=0.1.6",
+    "psycopg2-binary>=2.9.11",
+    "python-dotenv>=1.2.1",
+]
