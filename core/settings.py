@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -132,3 +133,24 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Atualizado o sistema de autenticação para usar o modelo Guardian ao invés do padrão 'django.contrib.auth.models.User'
 AUTH_USER_MODEL = "accounts.Guardian"
+
+
+# -----------------------------------------------------------------
+# CONFIGURAÇÃO DE ARQUIVOS ESTÁTICOS (STATIC FILES)
+# -----------------------------------------------------------------
+
+# A URL para acessar os arquivos estáticos (ex: /static/css/style.css)
+# Esta linha JÁ EXISTE no seu settings.py
+STATIC_URL = 'static/'
+
+# [ADICIONE ISTO]
+# A pasta onde o 'collectstatic' vai JUNTAR todos os arquivos para produção.
+# 'staticfiles' (com 'files') é um nome comum para não confundir.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# [ADICIONE ISTO - Opcional, mas recomendado]
+# As pastas onde o Django vai PROCURAR por arquivos estáticos
+# que NÃO estão dentro de um app (ex: seu logo principal).
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]

@@ -41,6 +41,18 @@ class ModuleAdmin(admin.ModelAdmin):
     readonly_fields = ("public_id",)
 
 
+# Configuração personalizada para o modelo Material no admin
+class MaterialInline(admin.TabularInline):
+    model = Material
+    extra = 1 # Mostra 1 slot de upload em branco
+
+
+# Configuração personalizada para o modelo Legenda no admin
+class SubtitleInline(admin.TabularInline):
+    model = Subtitle
+    extra = 1 # Mostra 1 slot de upload em branco
+
+
 # Configuração personalizada para o modelo Lição no admin
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
@@ -74,13 +86,3 @@ class LessonProgressAdmin(admin.ModelAdmin):
     search_fields = ("student__nickname", "lesson__title")
     readonly_fields = ("public_id", "completed_at")
 
-
-# Configuração personalizada para o modelo Material no admin
-class MaterialInline(admin.TabularInline):
-    model = Material
-    extra = 1 # Mostra 1 slot de upload em branco
-
-# Configuração personalizada para o modelo Legenda no admin
-class SubtitleInline(admin.TabularInline):
-    model = Subtitle
-    extra = 1 # Mostra 1 slot de upload em branco
