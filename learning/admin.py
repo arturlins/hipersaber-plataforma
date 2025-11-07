@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course, Module, Lesson, Enrollment, LessonProgress
+from .models import Course, Module, Lesson, Enrollment, LessonProgress, Material, Subtitle
 
 # --- Configuração Avançada para Cursos, Módulos e Lições ---
 
@@ -48,6 +48,7 @@ class LessonAdmin(admin.ModelAdmin):
     list_filter = ("module__course", "lesson_type")  # Filtra por curso ou tipo
     search_fields = ("title", "content")
     readonly_fields = ("public_id",)
+    inlines = [MaterialInline, SubtitleInline]
 
 
 # --- Configuração Simples para Matrículas e Progresso ---
@@ -72,3 +73,14 @@ class LessonProgressAdmin(admin.ModelAdmin):
     list_filter = ("lesson__module__course",)  # Filtra pelo curso
     search_fields = ("student__nickname", "lesson__title")
     readonly_fields = ("public_id", "completed_at")
+
+
+# Configuração personalizada para o modelo Material no admin
+class MaterialInline(admin.TabularInline):
+    model = Material
+    extra = 1 # Mostra 1 slot de upload em branco
+
+# Configuração personalizada para o modelo Legenda no admin
+class SubtitleInline(admin.TabularInline):
+    model = Subtitle
+    extra = 1 # Mostra 1 slot de upload em branco

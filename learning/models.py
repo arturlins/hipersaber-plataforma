@@ -225,3 +225,80 @@ class LessonProgress(models.Model):
 
     def __str__(self):
         return f"Progresso: {self.student.nickname} completou {self.lesson.title}"
+
+
+# Modelo: material de apoio
+class Material(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True,
+        db_index=True,
+        help_text="ID público para ser usado em URLs e APIs.",
+    )
+    lesson = models.ForeignKey(
+        Lesson,
+        on_delete=models.CASCADE,
+        related_name="materials",  # Permite fazer lesson.materials.all()
+        help_text="Lição à qual este material pertence.",
+    )
+    title = models.CharField(
+        max_length=255,
+        help_text="Título do material (ex: 'Slides da Aula', 'Código Fonte').",
+    )
+    file_url = models.URLField(
+        max_length=255, help_text="URL para o arquivo (PDF, ZIP, etc)."
+    )
+    file_type = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+        help_text="Tipo do arquivo (ex: 'pdf', 'zip').",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Material de Apoio"
+        verbose_name_plural = "Materiais de Apoio"
+        ordering = ["created_at"]  # Ordena os materiais pelo mais antigo
+
+    def __str__(self):
+        return f"{self.title} (Lição: {self.lesson.title})"
+
+
+# Modelo: legenda
+class Subtitle(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    public_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        unique=True,
+        db_index=True,
+        help_text="ID público para ser usado em URLs e APIs.",
+    )
+    lesson = models.ForeignKey(
+        Lesson,
+        on_delete=models.CASCADE,
+        related_name="subtitles",  # Permite fazer lesson.subtitles.all()
+        help_text="Lição de vídeo à qual esta legenda pertence.",
+    )
+    language_code = models.CharField(
+        max_length=10, help_text="Código da língua (ex: 'pt-BR', 'en-US')."
+    )
+    file_url = models.URLField(
+        max_length=255, help_text="URL para o arquivo .vtt ou .srt."
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Legenda"
+        verbose_name_plural = "Legendas"
+        # Garante que só exista uma legenda por língua para cada lição
+        unique_together = ("lesson", "language_code")
+        ordering = ["language_code"]
+
+    def __str__(self):
+        return f"Legenda {self.language_code} para {self.lesson.title}"
