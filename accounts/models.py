@@ -104,7 +104,6 @@ class User(AbstractBaseUser, PermissionsMixin): # <-- CLASSE RENOMEADA
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_staff = models.BooleanField(default=False) 
-    is_active = models.BooleanField(default=True)
     role = models.CharField(
         max_length=10,
         choices=RoleChoices.choices,
