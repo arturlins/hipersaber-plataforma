@@ -20,8 +20,8 @@ class ModuleInline(admin.StackedInline):
 # Configuração personalizada para o modelo Curso no admin.
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ("title", "audience", "published_at", "created_at")
-    list_filter = ("audience", "published_at")
+    list_display = ('title', 'created_at', 'updated_at')
+    list_filter = ('created_at',)
     search_fields = ("title", "description")
     inlines = [
         ModuleInline

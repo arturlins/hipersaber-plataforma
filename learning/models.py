@@ -11,12 +11,6 @@ class LessonTypeChoices(models.TextChoices):
     QUIZ = "quiz", "Quiz"
 
 
-# ENUM público-alvo do curso
-class CourseAudienceChoices(models.TextChoices):
-    STUDENT = "student", "Aluno"
-    GUARDIAN = "guardian", "Responsável"
-
-
 # Modelo: Cursos da plataforma
 class Course(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -36,17 +30,6 @@ class Course(models.Model):
         null=True,
         blank=True,
         help_text="URL para a imagem de capa (thumbnail).",
-    )
-    audience = models.CharField(
-        max_length=10,
-        choices=CourseAudienceChoices.choices,
-        default=CourseAudienceChoices.STUDENT,
-        help_text="Público-alvo do curso (Aluno ou Responsável).",
-    )
-    published_at = models.DateTimeField(
-        null=True,
-        blank=True,
-        help_text="Se nulo, o curso é um rascunho. Se preenchido, está visível.",
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "accounts.apps.AccountsConfig",
     "learning.apps.LearningConfig",
+    "support.apps.SupportConfig",
 ]
 
 MIDDLEWARE = [
@@ -132,7 +133,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Atualizado o sistema de autenticação para usar o modelo Guardian ao invés do padrão 'django.contrib.auth.models.User'
-AUTH_USER_MODEL = "accounts.Guardian"
+AUTH_USER_MODEL = "accounts.User"
 
 
 # -----------------------------------------------------------------
