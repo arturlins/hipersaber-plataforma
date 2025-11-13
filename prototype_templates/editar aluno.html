@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Editar Perfil de Aluno</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco)
+      - #ec4899 (Rosa-Vibrante)
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho Padrão (ID HiperSaber) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-6 px-8">
+    <div class="w-full max-w-screen-lg flex items-center justify-between">
+      <span class="text-3xl font-bold logo-gradient">
+        <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+      </span>
+      <nav>
+        <div class="relative">
+          <!-- Botão "Minha Conta" (Estilo Principal) -->
+          <button id="accountMenuBtn"
+                  class="flex items-center gap-2 px-8 py-3 rounded-full font-semibold shadow-sm focus:outline-none transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg"
+                  aria-haspopup="true" aria-expanded="false">
+            <span class="hidden sm:inline">Minha Conta</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.657 0 3.234.267 4.712.763M12 7a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </button>
+          <!-- Dropdown Menu -->
+          <div id="accountMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg transition duration-200 opacity-0 pointer-events-none z-50" tabindex="-1">
+            <ul class="py-2">
+              <li>
+                <a href="#rf004" class="block px-4 py-2 hover:bg-gray-100 transition">Meus Dados</a>
+              </li>
+              <li>
+                <a href="#rf020" class="block px-4 py-2 hover:bg-gray-100 transition">Mudar Perfil de Aluno</a>
+              </li>
+              <li>
+                <hr class="my-1 border-gray-200" />
+              </li>
+              <li>
+                <a href="#rf001" class="block px-4 py-2 text-[#ec4899] hover:bg-pink-50 transition">Sair</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8">
+    <div class="max-w-screen-lg mx-auto">
+      
+      <!-- Título contextual (RF005 - Passo 10) -->
+      <h1 class="text-3xl font-bold mb-8 text-white">
+        Editar Perfil de <span class="text-[#00f5d4]">João Silva</span>
+      </h1>
+
+      <!-- Formulário de Edição de Perfil do Aluno -->
+      <section id="rf005-editar-aluno">
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8">
+          <form id="form-editar-aluno">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Nome ou Apelido (Pré-preenchido) -->
+              <div class="md:col-span-2">
+                <label for="nome-aluno" class="block text-sm font-medium text-[#4a5568]">Nome ou apelido do Aluno</label>
+                <input type="text" id="nome-aluno" value="João Silva" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                <!-- Exemplo de Erro (FA016): 
+                <p class="text-red-600 text-sm mt-1">Nome deve ter ao menos 3 caracteres.</p> 
+                -->
+              </div>
+
+              <!-- Ano Escolar (Pré-preenchido) -->
+              <div>
+                <label for="ano-escolar" class="block text-sm font-medium text-[#4a5568]">Ano Escolar</label>
+                <select id="ano-escolar" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                  <option value="" disabled>Selecione o ano...</option>
+                  <option value="1">1º Ano (Ensino Fundamental)</option>
+                  <option value="2">2º Ano (Ensino Fundamental)</option>
+                  <option value="3">3º Ano (Ensino Fundamental)</option>
+                  <option value="4">4º Ano (Ensino Fundamental)</option>
+                  <option value="5" selected>5º Ano (Ensino Fundamental)</option>
+                  <option value="6">6º Ano (Ensino Fundamental)</option>
+                  <option value="7">7º Ano (Ensino Fundamental)</option>
+                  <option value="8">8º Ano (Ensino Fundamental)</option>
+                  <option value="9">9º Ano (Ensino Fundamental)</option>
+                </select>
+              </div>
+
+              <!-- Data de Nascimento (Pré-preenchido) -->
+              <div>
+                <label for="data-nascimento" class="block text-sm font-medium text-[#4a5568]">Data de Nascimento</label>
+                <input type="date" id="data-nascimento" value="2015-05-10" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+              </div>
+            </div>
+
+            <!-- Tipo de TDAH (Pré-preenchido) -->
+            <div class="mt-8">
+              <label class="block text-base font-medium text-[#2d3748]">Tipo do TDAH (Se souber)</label>
+              <fieldset class="mt-4 space-y-4">
+                
+                <!-- Opção 1: Desatento (Pré-selecionado) -->
+                <div class="relative flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div class="flex items-center h-5">
+                    <input id="tdah-desatento" name="tipo-tdah" type="radio" value="desatento" class="focus:ring-[#564adc] h-4 w-4 text-[#564adc] border-gray-300" checked>
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tdah-desatento" class="font-bold text-[#2d3748]">Predominantemente Desatento</label>
+                    <p class="text-[#4a5568] mt-1">Dificuldade principal em manter a concentração, com tendência a se distrair e perder detalhes.</p>
+                  </div>
+                </div>
+                
+                <!-- Opção 2: Hiperativo -->
+                <div class="relative flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div class="flex items-center h-5">
+                    <input id="tdah-hiperativo" name="tipo-tdah" type="radio" value="hiperativo" class="focus:ring-[#564adc] h-4 w-4 text-[#564adc] border-gray-300">
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tdah-hiperativo" class="font-bold text-[#2d3748]">Predominantemente Hiperativo/Impulsivo</label>
+                    <p class="text-[#4a5568] mt-1">Excesso de energia, inquietude e agitação. Dificuldade em permanecer parado e agir por impulso.</p>
+                  </div>
+                </div>
+
+                <!-- Opção 3: Combinado -->
+                <div class="relative flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div class="flex items-center h-5">
+                    <input id="tdah-combinado" name="tipo-tdah" type="radio" value="combinado" class="focus:ring-[#564adc] h-4 w-4 text-[#564adc] border-gray-300">
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tdah-combinado" class="font-bold text-[#2d3748]">Combinado</label>
+                    <p class="text-[#4a5568] mt-1">Apresenta uma combinação de sintomas dos tipos desatento e hiperativo.</p>
+                  </div>
+                </div>
+
+                <!-- Opção 4: Não sei -->
+                <div class="relative flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div class="flex items-center h-5">
+                    <input id="tdah-nao-sei" name="tipo-tdah" type="radio" value="nao_informado" class="focus:ring-[#564adc] h-4 w-4 text-[#564adc] border-gray-300">
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tdah-nao-sei" class="font-bold text-[#2d3748]">Não sei informar / Prefiro não dizer</label>
+                    <p class="text-[#4a5568] mt-1">Essa informação poderá ser modificada no futuro, no painel do usuário.</p>
+                  </div>
+                </div>
+
+              </fieldset>
+            </div>
+            
+            <!-- Botões de Ação (RF005 - Passo 12) -->
+            <div class="mt-8 pt-6 border-t border-gray-200 flex flex-col-reverse sm:flex-row-reverse sm:justify-start gap-4">
+              
+              <!-- Botão Primário: Salvar Alterações -->
+              <button type="submit"
+                      class="w-full sm:w-auto text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+                Salvar Alterações
+              </button>
+              
+              <!-- Botão Secundário: Cancelar (Volta para RF004) -->
+              <a href="#rf004-gerenciamento"
+                 class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white 
+                        transition-all duration-300 ease-in-out 
+                        hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                        focus:outline-none">
+                Cancelar
+              </a>
+
+            </div>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Padrão (ID HiperSaber) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-6 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita
+  </footer>
+
+  <!-- Dropdown interativo em JS -->
+  <script>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountMenu = document.getElementById('accountMenu');
+    document.addEventListener('click', (e) => {
+      // Abre/Fecha o menu ao clicar no botão
+      if (accountMenuBtn.contains(e.target)) {
+        accountMenu.classList.toggle('opacity-0');
+        accountMenu.classList.toggle('pointer-events-none');
+      } 
+      // Fecha o menu se clicar fora dele
+      else if (!accountMenu.contains(e.target)) {
+        accountMenu.classList.add('opacity-0');
+        accountMenu.classList.add('pointer-events-none');
+      }
+    });
+  </script>
+</body>
+</html>

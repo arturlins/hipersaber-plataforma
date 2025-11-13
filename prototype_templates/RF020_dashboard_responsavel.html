@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Seleção de Perfil (Responsável)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    /* Estilo do botão gradiente, copiado da home */
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    a.card-link {
+      text-decoration: none;
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Base: #FFFFFF (Branco-Neve), #2d3748 (Grafite), #4a5568 (Cinza-Médio)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco) -> Usado no hover do botão "Adicionar"
+      - #ec4899 (Rosa-Vibrante) -> Usado nos ícones de TDAH
+      - #fde047 (Amarelo-Solar) -> (Disponível para recompensas)
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-6 px-8">
+    <div class="w-full max-w-screen-lg flex items-center justify-between">
+      <span class="text-3xl font-bold logo-gradient">
+        <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+      </span>
+      <nav>
+        <div class="relative">
+          <button id="accountMenuBtn"
+                  class="flex items-center gap-2 px-8 py-3 rounded-full font-semibold shadow-sm focus:outline-none transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg"
+                  aria-haspopup="true" aria-expanded="false">
+            <span class="hidden sm:inline">Minha Conta</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.657 0 3.234.267 4.712.763M12 7a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </button>
+          <div id="accountMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg transition duration-200 opacity-0 pointer-events-none z-50" tabindex="-1">
+            <ul class="py-2">
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 transition">Meus Dados</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 transition">Escolher o Perfil de Aluno</a>
+              </li>
+              <li>
+                <hr class="my-1 border-gray-200" />
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 text-[#ec4899] hover:bg-pink-50 transition">Sair</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 py-10 px-4 sm:px-8">
+    <div class="max-w-screen-lg mx-auto">
+      <h1 class="text-3xl font-bold mb-6 text-white">Perfis de alunos</h1>
+      <section id="alunoCards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <a href="/dashboard-aluno/joao-silva" class="card-link group">
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-6 flex flex-col gap-3 border border-[#564adc]/30 hover:-translate-y-1 hover:shadow-xl hover:bg-white transition cursor-pointer group-hover:ring-2 group-hover:ring-[#564adc]">
+            <span class="text-xl font-extrabold" style="color: #564adc">João Silva</span>
+            <span class="text-gray-700">Ano Escolar: 5º ano</span>
+            <span class="inline-flex items-center gap-1 text-gray-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#ec4899">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17l6-6.75"/>
+              </svg>
+              TDAH: Inatento
+            </span>
+          </div>
+        </a>
+        <a href="/dashboard-aluno/ana-souza" class="card-link group">
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-6 flex flex-col gap-3 border border-[#564adc]/30 hover:-translate-y-1 hover:shadow-xl hover:bg-white transition cursor-pointer group-hover:ring-2 group-hover:ring-[#564adc]">
+            <span class="text-xl font-extrabold" style="color: #564adc">Ana Souza</span>
+            <span class="text-gray-700">Ano Escolar: 8º ano</span>
+            <span class="inline-flex items-center gap-1 text-gray-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#ec4899">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17l6-6.75"/>
+              </svg>
+              TDAH: Hiperativo-Impulsivo
+            </span>
+          </div>
+        </a>
+        <a href="/dashboard-aluno/lucas-pereira" class="card-link group">
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-6 flex flex-col gap-3 border border-[#564adc]/30 hover:-translate-y-1 hover:shadow-xl hover:bg-white transition cursor-pointer group-hover:ring-2 group-hover:ring-[#564adc]">
+            <span class="text-xl font-extrabold" style="color: #564adc">Lucas Pereira</span>
+            <span class="text-gray-700">Ano Escolar: 7º ano</span>
+            <span class="inline-flex items-center gap-1 text-gray-700">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="#ec4899">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17l6-6.75"/>
+              </svg>
+              TDAH: Combinado
+            </span>
+          </div>
+        </a>
+      </section>
+      
+      <div class="mt-8">
+        <a href="/cadastro-aluno" 
+           class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white 
+                  transition-all duration-300 ease-in-out 
+                  hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                  focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          Adicionar novo Aluno
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-6 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita
+  </footer>
+
+  <script>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountMenu = document.getElementById('accountMenu');
+    document.addEventListener('click', (e) => {
+      if (accountMenuBtn.contains(e.target)) {
+        accountMenu.classList.toggle('opacity-0');
+        accountMenu.classList.toggle('pointer-events-none');
+      } else if (!accountMenu.contains(e.target)) {
+        accountMenu.classList.add('opacity-0');
+        accountMenu.classList.add('pointer-events-none');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Canal de Suporte</title>
+  <!-- Carrega o plugin 'typography' para a classe 'prose' -->
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco)
+      - #ec4899 (Rosa-Vibrante)
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho Padrão (ID HiperSaber) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-6 px-8">
+    <div class="w-full max-w-screen-lg flex items-center justify-between">
+      <a href="#rf021" title="Voltar ao Dashboard">
+        <span class="text-3xl font-bold logo-gradient">
+          <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+        </span>
+      </a>
+      <nav>
+        <div class="relative">
+          <!-- Botão "Minha Conta" (Estilo Principal) -->
+          <button id="accountMenuBtn"
+                  class="flex items-center gap-2 px-8 py-3 rounded-full font-semibold shadow-sm focus:outline-none transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg"
+                  aria-haspopup="true" aria-expanded="false">
+            <span class="hidden sm:inline">Minha Conta</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.657 0 3.234.267 4.712.763M12 7a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </button>
+          <!-- Dropdown Menu -->
+          <div id="accountMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg transition duration-200 opacity-0 pointer-events-none z-50" tabindex="-1">
+            <ul class="py-2">
+              <li>
+                <a href="#rf004" class="block px-4 py-2 hover:bg-gray-100 transition">Meus Dados</a>
+              </li>
+              <li>
+                <a href="#rf020" class="block px-4 py-2 hover:bg-gray-100 transition">Mudar Perfil de Aluno</a>
+              </li>
+              <li>
+                <hr class="my-1 border-gray-200" />
+              </li>
+              <li>
+                <a href="#rf001" class="block px-4 py-2 text-[#ec4899] hover:bg-pink-50 transition">Sair</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8">
+    <div class="max-w-screen-lg mx-auto">
+      
+      <h1 class="text-3xl font-bold mb-8 text-white">Canal de Suporte</h1>
+
+      <!-- Formulário de Suporte (RF028) -->
+      <section id="rf028-suporte">
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8">
+          
+          <!-- Mensagem de Sucesso (RF028 - Passo 8) - Oculta por padrão -->
+          <div id="mensagem-sucesso" class="hidden text-center">
+            <div class="text-6xl mb-4">✉️</div>
+            <h2 class="text-2xl font-bold text-[#2d3748] mb-4">Mensagem Enviada com Sucesso!</h2>
+            <p class="text-lg text-[#4a5568]">
+              Sua solicitação foi registrada. Responderemos no e-mail 
+              <strong id="email-resposta" class="text-[#3d35a8]"></strong> o mais breve possível.
+            </p>
+            <a href="#rf021" 
+               class="mt-8 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white 
+                      transition-all duration-300 ease-in-out 
+                      hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                      focus:outline-none">
+              Voltar ao Dashboard
+            </a>
+          </div>
+
+          <!-- Formulário (RF028 - Passo 2) -->
+          <form id="form-suporte" class="space-y-6">
+            
+            <h2 class="text-2xl font-bold text-[#2d3748]">Fale Conosco</h2>
+            <p class="text-[#4a5568]">
+              Tem alguma dúvida, sugestão ou encontrou um problema? Envie sua mensagem e nossa equipe responderá em breve.
+            </p>
+
+            <!-- E-mail (Somente Leitura - RF028 - Passo 3) -->
+            <div>
+              <label for="email-responsavel" class="block text-sm font-medium text-[#4a5568]">Seu E-mail (para resposta)</label>
+              <input type="email" id="email-responsavel" value="amanda.lemos@email.com" readonly 
+                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100 text-gray-500 cursor-not-allowed">
+            </div>
+
+            <!-- Assunto (RF028 - Passo 4) -->
+            <div>
+              <label for="assunto" class="block text-sm font-medium text-[#4a5568]">Assunto</label>
+              <input type="text" id="assunto" required 
+                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]" 
+                     placeholder="Ex: Problema com o quiz da Lição 5">
+              <!-- Exemplo de Erro (FA064): 
+              <p class="text-red-600 text-sm mt-1">Este campo é obrigatório.</p> 
+              -->
+            </div>
+            
+            <!-- Mensagem (RF028 - Passo 4) -->
+            <div>
+              <label for="mensagem" class="block text-sm font-medium text-[#4a5568]">Mensagem</label>
+              <textarea id="mensagem" rows="6" required 
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]" 
+                        placeholder="Descreva seu problema, dúvida ou sugestão..."></textarea>
+              <!-- Exemplo de Erro (FA064): 
+              <p class="text-red-600 text-sm mt-1">Este campo é obrigatório.</p> 
+              -->
+            </div>
+
+            <!-- Botão de Envio (RF028 - Passo 5) -->
+            <div class="pt-4">
+              <button type="submit" 
+                      class="w-full sm:w-auto text-center px-8 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-5 w-5 mr-2 -mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Enviar Mensagem
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Padrão (ID HiperSaber) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-6 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita
+  </footer>
+
+  <!-- Dropdown interativo em JS -->
+  <script>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountMenu = document.getElementById('accountMenu');
+    document.addEventListener('click', (e) => {
+      // Abre/Fecha o menu ao clicar no botão
+      if (accountMenuBtn && accountMenuBtn.contains(e.T)) {
+        accountMenu.classList.toggle('opacity-0');
+        accountMenu.classList.toggle('pointer-events-none');
+      } 
+      // Fecha o menu se clicar fora dele
+      else if (accountMenu && !accountMenu.contains(e.target)) {
+        accountMenu.classList.add('opacity-0');
+        accountMenu.classList.add('pointer-events-none');
+      }
+    });
+  </script>
+
+  <!-- Script para Simulação de Sucesso (RF028 - Passo 8) -->
+  <script>
+    const formSuporte = document.getElementById('form-suporte');
+    const msgSucesso = document.getElementById('mensagem-sucesso');
+    const emailInput = document.getElementById('email-responsavel');
+    const emailRespostaSpan = document.getElementById('email-resposta');
+
+    if (formSuporte) {
+      formSuporte.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede o envio real do formulário
+        
+        // (Validação (FA064) é tratada pelo atributo 'required' do HTML5)
+
+        // (RF028 - Passo 8) Simulação de Sucesso
+        const email = emailInput.value;
+        if (emailRespostaSpan) {
+          emailRespostaSpan.textContent = email;
+        }
+        
+        formSuporte.classList.add('hidden');
+        if (msgSucesso) {
+          msgSucesso.classList.remove('hidden');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>

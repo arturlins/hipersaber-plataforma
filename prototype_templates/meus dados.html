@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Gerenciamento da Conta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Base: #FFFFFF (Branco-Neve), #2d3748 (Grafite), #4a5568 (Cinza-Médio)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco)
+      - #ec4899 (Rosa-Vibrante) -> Usado para Ações de Perigo (Remover/Excluir)
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho Padrão (ID HiperSaber) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-6 px-8">
+    <div class="w-full max-w-screen-lg flex items-center justify-between">
+      <span class="text-3xl font-bold logo-gradient">
+        <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+      </span>
+      <nav>
+        <div class="relative">
+          <!-- Botão "Minha Conta" (Estilo Principal) -->
+          <button id="accountMenuBtn"
+                  class="flex items-center gap-2 px-8 py-3 rounded-full font-semibold shadow-sm focus:outline-none transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg"
+                  aria-haspopup="true" aria-expanded="false">
+            <span class="hidden sm:inline">Minha Conta</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.657 0 3.234.267 4.712.763M12 7a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </button>
+          <!-- Dropdown Menu -->
+          <div id="accountMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg transition duration-200 opacity-0 pointer-events-none z-50" tabindex="-1">
+            <ul class="py-2">
+              <li>
+                <a href="#rf004" class="block px-4 py-2 hover:bg-gray-100 transition">Meus Dados</a>
+              </li>
+              <li>
+                <a href="#rf020" class="block px-4 py-2 hover:bg-gray-100 transition">Mudar Perfil de Aluno</a>
+              </li>
+              <li>
+                <hr class="my-1 border-gray-200" />
+              </li>
+              <li>
+                <a href="#rf001" class="block px-4 py-2 text-[#ec4899] hover:bg-pink-50 transition">Sair</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8">
+    <div class="max-w-screen-lg mx-auto">
+      
+      <h1 class="text-3xl font-bold mb-8 text-white">Minha Conta</h1>
+
+      <!-- RF004: Gerenciamento do Próprio Perfil (Dados e Senha) -->
+      <section id="rf004-perfil" class="mb-12">
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2">
+            
+            <!-- Coluna 1: Meus Dados Cadastrais -->
+            <div class="p-8 border-b md:border-b-0 md:border-r border-gray-200">
+              <h2 class="text-2xl font-bold mb-6 text-[#2d3748]">Meus Dados</h2>
+              <form class="space-y-4">
+                <div>
+                  <label for="nome-responsavel" class="block text-sm font-medium text-[#4a5568]">Nome Completo</label>
+                  <input type="text" id="nome-responsavel" value="Amanda Lemos (Responsável)" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                  <!-- Exemplo de Erro (FA011): 
+                  <p class="text-red-600 text-sm mt-1">Nome deve ter ao menos 3 caracteres.</p> 
+                  -->
+                </div>
+                <div>
+                  <label for="email-responsavel" class="block text-sm font-medium text-[#4a5568]">Email</label>
+                  <input type="email" id="email-responsavel" value="amanda.lemos@email.com" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                  <!-- Exemplo de Erro (FA012): 
+                  <p class="text-red-600 text-sm mt-1">Este e-mail já está em uso.</p> 
+                  -->
+                </div>
+                <button type="submit" class="mt-4 w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+                  Salvar Alterações
+                </button>
+              </form>
+            </div>
+            
+            <!-- Coluna 2: Alterar Senha -->
+            <div class="p-8">
+              <h2 class="text-2xl font-bold mb-6 text-[#2d3748]">Alterar Senha</h2>
+              <form class="space-y-4">
+                <div>
+                  <label for="senha-atual" class="block text-sm font-medium text-[#4a5568]">Senha Atual</label>
+                  <input type="password" id="senha-atual" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                  <!-- Exemplo de Erro (FA013): 
+                  <p class="text-red-600 text-sm mt-1">A senha atual está incorreta.</p> 
+                  -->
+                </div>
+                <div>
+                  <label for="nova-senha" class="block text-sm font-medium text-[#4a5568]">Nova Senha</label>
+                  <input type="password" id="nova-senha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                  <p class="mt-1 text-xs text-gray-500">Mín. 8 caracteres, com maiúscula, minúscula, número e símbolo (@#$%&*).</p>
+                  <!-- Exemplo de Erro (FA015): 
+                  <p class="text-red-600 text-sm mt-1">A senha não atende aos requisitos.</p> 
+                  -->
+                </div>
+                <div>
+                  <label for="confirma-nova-senha" class="block text-sm font-medium text-[#4a5568]">Confirme a Nova Senha</label>
+                  <input type="password" id="confirma-nova-senha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                  <!-- Exemplo de Erro (FA014): 
+                  <p class="text-red-600 text-sm mt-1">As senhas não conferem.</p> 
+                  -->
+                </div>
+                <button type="submit" class="mt-4 w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+                  Salvar Nova Senha
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RF005: Gerenciamento de Perfis de Alunos -->
+      <section id="rf005-alunos" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-white">Gerenciar Alunos</h2>
+        
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8">
+          <div class="space-y-4 divide-y divide-gray-200">
+            
+            <!-- Item Aluno 1 -->
+            <div class="flex flex-wrap justify-between items-center pt-4 first:pt-0">
+              <div class="mb-2 sm:mb-0">
+                <span class="font-bold text-lg text-[#2d3748]">João Silva</span>
+                <span class="block sm:inline sm:ml-4 text-sm text-[#4a5568]">5º ano | TDAH: Inatento</span>
+              </div>
+              <div class="flex gap-2">
+                <a href="#rf005-editar-aluno" class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536L16.732 3.732z" /></svg>
+                  Editar
+                </a>
+                <button class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-sm border-2 border-[#ec4899] text-[#ec4899] bg-white transition-all duration-300 ease-in-out hover:bg-[#ec4899] hover:text-white hover:-translate-y-0.5 hover:shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                  Remover
+                </button>
+              </div>
+            </div>
+            
+            <!-- Item Aluno 2 -->
+            <div class="flex flex-wrap justify-between items-center pt-4">
+              <div class="mb-2 sm:mb-0">
+                <span class="font-bold text-lg text-[#2d3748]">Ana Souza</span>
+                <span class="block sm:inline sm:ml-4 text-sm text-[#4a5568]">8º ano | TDAH: Hiperativo-Impulsivo</span>
+              </div>
+              <div class="flex gap-2">
+                <a href="#rf005-editar-aluno" class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536L16.732 3.732z" /></svg>
+                  Editar
+                </a>
+                <button class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-sm border-2 border-[#ec4899] text-[#ec4899] bg-white transition-all duration-300 ease-in-out hover:bg-[#ec4899] hover:text-white hover:-translate-y-0.5 hover:shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                  Remover
+                </button>
+              </div>
+            </div>
+            
+            <!-- Exemplo de Erro (FA017): 
+            <p class="text-red-600 text-sm mt-1 text-center">Não é possível remover o último aluno. Sua conta deve ter pelo menos um.</p> 
+            -->
+
+          </div>
+          
+          <!-- Botão Adicionar (RF005 - Passo 4) -->
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <a href="#rf001-cadastro-aluno" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              Adicionar novo Aluno
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- RF006: Gestão de Exclusão de Conta -->
+      <section id="rf006-excluir">
+        <h2 class="text-2xl font-bold mb-6 text-white">Excluir Conta</h2>
+
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8 border-2 border-red-400">
+          <h3 class="text-xl font-bold text-red-700 mb-2">Área de Risco</h3>
+          <p class="text-[#4a5568] mb-4">A exclusão da sua conta é uma ação permanente e irreversível. Todos os seus dados, incluindo os perfis de seus alunos e todo o progresso de cursos, serão apagados definitivamente, conforme a LGPD.</p>
+          
+          <form class="space-y-4">
+             <div>
+               <label for="confirma-senha-exclusao" class="block text-sm font-medium text-[#4a5568]">Para confirmar, digite sua senha atual:</label>
+               <input type="password" id="confirma-senha-exclusao" class="mt-1 block w-full max-w-sm rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500">
+               <!-- Exemplo de Erro (FA018): 
+               <p class="text-red-600 text-sm mt-1">A senha está incorreta. A exclusão não foi realizada.</p> 
+               -->
+             </div>
+             
+             <!-- Botão de Exclusão (Estilo Perigo Sólido) -->
+             <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold shadow-sm transition bg-[#ec4899] text-white border-2 border-transparent hover:bg-pink-700 hover:-translate-y-0.5 hover:shadow-lg">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+               </svg>
+               Excluir minha conta permanentemente
+             </button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Padrão (ID HiperSaber) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-6 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita
+  </footer>
+
+  <!-- Dropdown interativo em JS -->
+  <script>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountMenu = document.getElementById('accountMenu');
+    document.addEventListener('click', (e) => {
+      // Abre/Fecha o menu ao clicar no botão
+      if (accountMenuBtn.contains(e.target)) {
+        accountMenu.classList.toggle('opacity-0');
+        accountMenu.classList.toggle('pointer-events-none');
+      } 
+      // Fecha o menu se clicar fora dele
+      else if (!accountMenu.contains(e.target)) {
+        accountMenu.classList.add('opacity-0');
+        accountMenu.classList.add('pointer-events-none');
+      }
+    });
+  </script>
+</body>
+</html>

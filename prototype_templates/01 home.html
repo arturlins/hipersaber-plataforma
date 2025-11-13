@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HiperSaber - Educação Inclusiva para Crianças com TDAH</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem 2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-login {
+        background: transparent;
+        color: #564adc;
+        border: 2px solid #564adc;
+      }
+
+      .btn-login:hover {
+        background: #564adc;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(86, 74, 220, 0.4);
+      }
+
+      .btn-signup {
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        color: white;
+        border: 2px solid transparent;
+      }
+
+      .btn-signup:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(86, 74, 220, 0.5);
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .hero-section {
+        max-width: 1200px;
+        width: 100%;
+        background: white;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 500px;
+      }
+
+      .hero-content {
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+        color: #2d3748;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .hero-content .highlight {
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+        color: #4a5568;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .hero-image {
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-image::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+      }
+
+      .hero-image::after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        bottom: -50px;
+        left: -50px;
+      }
+
+      .banner-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        color: white;
+      }
+
+      .brain-icon {
+        font-size: 8rem;
+        margin-bottom: 1rem;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+      }
+
+      .banner-content h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .banner-content p {
+        font-size: 1.2rem;
+        opacity: 0.95;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .feature {
+        text-align: center;
+        padding: 1rem;
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .feature h3 {
+        font-size: 1rem;
+        color: #2d3748;
+        margin-bottom: 0.25rem;
+      }
+
+      .feature p {
+        font-size: 0.85rem;
+        color: #718096;
+        margin: 0;
+      }
+
+      footer {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem 2rem;
+        text-align: center;
+        color: #4a5568;
+      }
+
+      @media (max-width: 968px) {
+        .hero-section {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-image {
+          min-height: 300px;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header-content {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .auth-buttons {
+          width: 100%;
+        }
+
+        .btn {
+          flex: 1;
+          text-align: center;
+        }
+
+        .hero-content {
+          padding: 2rem;
+        }
+
+        .brain-icon {
+          font-size: 5rem;
+        }
+
+        .banner-content h2 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">🚀 HiperSaber</div>
+        <div class="auth-buttons">
+          <button class="btn btn-login" onclick="window.location.href='#login'">
+            Login
+          </button>
+          <button
+            class="btn btn-signup"
+            onclick="window.location.href='#cadastro'"
+          >
+            Cadastre-se
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero-section">
+        <div class="hero-content">
+          <h1>
+            Aprendizado inclusivo para crianças com
+            <span class="highlight">TDAH</span>
+          </h1>
+          <p>
+            Uma plataforma educacional que respeita o ritmo e as necessidades de
+            cada aluno, tornando a matemática acessível e divertida através de
+            objetos de aprendizagem especialmente desenvolvidos.
+          </p>
+
+          <div class="features">
+            <div class="feature">
+              <div class="feature-icon">🎯</div>
+              <h3>Foco</h3>
+              <p>Ambiente livre de distrações</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">👨‍👩‍👧</div>
+              <h3>Supervisão</h3>
+              <p>Acompanhamento familiar</p>
+            </div>
+            <div class="feature">
+              <div class="feature-icon">📚</div>
+              <h3>Conteúdo</h3>
+              <p>Objetos de alta qualidade</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image">
+          <div class="banner-content">
+            <div class="brain-icon">🧠</div>
+            <h2>Potencialize o Saber</h2>
+            <p>Transforme a energia em conhecimento</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        &copy; 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita
+      </p>
+    </footer>
+  </body>
+</html>

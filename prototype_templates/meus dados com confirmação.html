@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Gerenciamento da Conta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Base: #FFFFFF (Branco-Neve), #2d3748 (Grafite), #4a5568 (Cinza-Média)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco)
+      - #ec4899 (Rosa-Vibrante) -> Usado para Ações de Perigo (Remover/Excluir)
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho Padrão (ID HiperSaber) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-6 px-8">
+    <div class="w-full max-w-screen-lg flex items-center justify-between">
+      <span class="text-3xl font-bold logo-gradient">
+        <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+      </span>
+      <nav>
+        <div class="relative">
+          <!-- Botão "Minha Conta" (Estilo Principal) -->
+          <button id="accountMenuBtn"
+                  class="flex items-center gap-2 px-8 py-3 rounded-full font-semibold shadow-sm focus:outline-none transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg"
+                  aria-haspopup="true" aria-expanded="false">
+            <span class="hidden sm:inline">Minha Conta</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.657 0 3.234.267 4.712.763M12 7a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </button>
+          <!-- Dropdown Menu -->
+          <div id="accountMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg transition duration-200 opacity-0 pointer-events-none z-50" tabindex="-1">
+            <ul class="py-2">
+              <li>
+                <a href="#rf004" class="block px-4 py-2 hover:bg-gray-100 transition">Meus Dados</a>
+              </li>
+              <li>
+                <a href="#rf020" class="block px-4 py-2 hover:bg-gray-100 transition">Mudar Perfil de Aluno</a>
+              </li>
+              <li>
+                <hr class="my-1 border-gray-200" />
+              </li>
+              <li>
+                <a href="#rf001" class="block px-4 py-2 text-[#ec4899] hover:bg-pink-50 transition">Sair</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8">
+    <div class="max-w-screen-lg mx-auto">
+      
+      <h1 class="text-3xl font-bold mb-8 text-white">Minha Conta</h1>
+
+      <!-- RF004: Gerenciamento do Próprio Perfil (Dados e Senha) -->
+      <section id="rf004-perfil" class="mb-12">
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg overflow-hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2">
+            
+            <!-- Coluna 1: Meus Dados Cadastrais -->
+            <div class="p-8 border-b md:border-b-0 md:border-r border-gray-200">
+              <h2 class="text-2xl font-bold mb-6 text-[#2d3748]">Meus Dados</h2>
+              <form class="space-y-4">
+                <div>
+                  <label for="nome-responsavel" class="block text-sm font-medium text-[#4a5568]">Nome Completo</label>
+                  <input type="text" id="nome-responsavel" value="Amanda Lemos (Responsável)" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                </div>
+                <div>
+                  <label for="email-responsavel" class="block text-sm font-medium text-[#4a5568]">Email</label>
+                  <input type="email" id="email-responsavel" value="amanda.lemos@email.com" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                </div>
+                <button type="submit" class="mt-4 w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+                  Salvar Alterações
+                </button>
+              </form>
+            </div>
+            
+            <!-- Coluna 2: Alterar Senha -->
+            <div class="p-8">
+              <h2 class="text-2xl font-bold mb-6 text-[#2d3748]">Alterar Senha</h2>
+              <form class="space-y-4">
+                <div>
+                  <label for="senha-atual" class="block text-sm font-medium text-[#4a5568]">Senha Atual</label>
+                  <input type="password" id="senha-atual" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                </div>
+                <div>
+                  <label for="nova-senha" class="block text-sm font-medium text-[#4a5568]">Nova Senha</label>
+                  <input type="password" id="nova-senha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                  <p class="mt-1 text-xs text-gray-500">Mín. 8 caracteres, com maiúscula, minúscula, número e símbolo (@#$%&*).</p>
+                </div>
+                <div>
+                  <label for="confirma-nova-senha" class="block text-sm font-medium text-[#4a5568]">Confirme a Nova Senha</label>
+                  <input type="password" id="confirma-nova-senha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                </div>
+                <button type="submit" class="mt-4 w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+                  Salvar Nova Senha
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RF005: Gerenciamento de Perfis de Alunos -->
+      <section id="rf005-alunos" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-white">Gerenciar Alunos</h2>
+        
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8">
+          <div class="space-y-4 divide-y divide-gray-200">
+            
+            <!-- Item Aluno 1 -->
+            <div class="flex flex-wrap justify-between items-center pt-4 first:pt-0">
+              <div class="mb-2 sm:mb-0">
+                <span class="font-bold text-lg text-[#2d3748]">João Silva</span>
+                <span class="block sm:inline sm:ml-4 text-sm text-[#4a5568]">5º ano | TDAH: Inatento</span>
+              </div>
+              <div class="flex gap-2">
+                <a href="#rf005-editar-aluno" class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536L16.732 3.732z" /></svg>
+                  Editar
+                </a>
+                <button type="button" 
+                        class="btn-remover-aluno inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-sm border-2 border-[#ec4899] text-[#ec4899] bg-white transition-all duration-300 ease-in-out hover:bg-[#ec4899] hover:text-white hover:-translate-y-0.5 hover:shadow-lg"
+                        data-aluno-nome="João Silva">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                  Remover
+                </button>
+              </div>
+            </div>
+            
+            <!-- Item Aluno 2 -->
+            <div class="flex flex-wrap justify-between items-center pt-4">
+              <div class="mb-2 sm:mb-0">
+                <span class="font-bold text-lg text-[#2d3748]">Ana Souza</span>
+                <span class="block sm:inline sm:ml-4 text-sm text-[#4a5568]">8º ano | TDAH: Hiperativo-Impulsivo</span>
+              </div>
+              <div class="flex gap-2">
+                <a href="#rf005-editar-aluno" class="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.536L16.732 3.732z" /></svg>
+                  Editar
+                </a>
+                <button type="button"
+                        class="btn-remover-aluno inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold shadow-sm border-2 border-[#ec4899] text-[#ec4899] bg-white transition-all duration-300 ease-in-out hover:bg-[#ec4899] hover:text-white hover:-translate-y-0.5 hover:shadow-lg"
+                        data-aluno-nome="Ana Souza">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                  Remover
+                </button>
+              </div>
+            </div>
+            
+          </div>
+          
+          <!-- Botão Adicionar (RF005 - Passo 4) -->
+          <div class="mt-8 pt-6 border-t border-gray-200">
+            <a href="#rf001-cadastro-aluno" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+              </svg>
+              Adicionar novo Aluno
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- RF006: Gestão de Exclusão de Conta -->
+      <section id="rf006-excluir">
+        <h2 class="text-2xl font-bold mb-6 text-white">Excluir Conta</h2>
+
+        <!-- 
+          *** ALTERAÇÃO AQUI (RF006) ***
+          - O formulário foi removido desta seção.
+          - Agora é apenas um card de aviso com um botão que abre o modal.
+        -->
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8 border-2 border-red-400">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between">
+            <div class="max-w-xl">
+              <h3 class="text-xl font-bold text-red-700 mb-2">Área de Risco</h3>
+              <p class="text-[#4a5568] mb-4">A exclusão da sua conta é uma ação permanente e irreversível. Todos os seus dados, incluindo os perfis de seus alunos e todo o progresso de cursos, serão apagados definitivamente, conforme a LGPD.</p>
+            </div>
+             
+             <!-- Botão que abre o modal (RF006 - Passo 3) -->
+             <button type="button" id="btn-abrir-modal-excluir" class="w-full sm:w-auto mt-4 sm:mt-0 sm:ml-6 flex-shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold shadow-sm transition bg-[#ec4899] text-white border-2 border-transparent hover:bg-pink-700 hover:-translate-y-0.5 hover:shadow-lg">
+               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+               </svg>
+               Excluir minha conta...
+             </button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Padrão (ID HiperSaber) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-6 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita
+  </footer>
+
+  <!-- 
+    =============================================================
+    MODAL 1: Confirmação REMOVER ALUNO (RF005c)
+    =============================================================
+  -->
+  <div id="modal-remover-aluno" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+    <!-- Overlay -->
+    <div id="modal-remover-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm"></div>
+    
+    <!-- Painel do Modal -->
+    <div class="relative w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 transform transition-all duration-300 scale-95 opacity-0" 
+         id="modal-remover-panel">
+      <div class="flex flex-col items-center text-center">
+        <!-- Ícone de Perigo (Rosa-Vibrante) -->
+        <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#ec4899]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-[#2d3748] mb-3">Confirmar Remoção</h2>
+        
+        <!-- Mensagem de Confirmação (RF005 - Passo 16) -->
+        <p class="text-[#4a5568] mb-8">
+          Você tem certeza de que deseja remover o perfil de <strong id="aluno-para-remover-nome" class="text-[#ec4899]"></strong>? 
+          Todo o progresso deste aluno será perdido permanentemente.
+        </p>
+        
+        <!-- Botões de Ação -->
+        <div class="flex flex-col-reverse sm:flex-row gap-4 w-full">
+          <button id="btn-cancelar-remocao" type="button" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center px-6 py-3 rounded-full font-bold shadow-sm border-2 border-gray-300 text-gray-700 bg-white hover:bg-gray-50 transition-all">
+            Cancelar
+          </button>
+          <button id="btn-confirmar-remocao" type="button" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold shadow-sm transition bg-[#ec4899] text-white border-2 border-transparent hover:bg-pink-700 hover:-translate-y-0.5 hover:shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Confirmar Remoção
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+    =============================================================
+    *** NOVO CONTEÚDO ADICIONADO ABAIXO ***
+    MODAL 2: Confirmação EXCLUIR CONTA (RF006)
+    =============================================================
+  -->
+  <div id="modal-excluir-conta" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+    <!-- Overlay -->
+    <div id="modal-excluir-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm"></div>
+    
+    <!-- Painel do Modal -->
+    <div class="relative w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 transform transition-all duration-300 scale-95 opacity-0" 
+         id="modal-excluir-panel">
+      
+      <div class="flex flex-col items-center text-center">
+        <!-- Ícone de Perigo (Rosa-Vibrante) -->
+        <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#ec4899]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        
+        <h2 class="text-2xl font-bold text-[#2d3748] mb-3">Excluir Conta Permanentemente</h2>
+        
+        <!-- Mensagem de Confirmação (RF006 - Passo 4) -->
+        <p class="text-[#4a5568] mb-6">
+          Esta ação é <strong>irreversível</strong>. Todos os dados da sua conta, perfis de alunos e progresso de cursos serão apagados.
+        </p>
+        
+        <!-- Formulário de Confirmação de Senha (RF006 - Passo 5) -->
+        <form class="w-full space-y-4 text-left">
+           <div>
+             <label for="modal-confirma-senha-exclusao" class="block text-sm font-medium text-[#4a5568]">Para confirmar, digite sua senha atual:</label>
+             <input type="password" id="modal-confirma-senha-exclusao" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500">
+             <!-- Exemplo de Erro (FA018): 
+             <p class="text-red-600 text-sm mt-1">A senha está incorreta. A exclusão não foi realizada.</p> 
+             -->
+           </div>
+           
+           <!-- Botões de Ação -->
+           <div class="flex flex-col-reverse sm:flex-row gap-4 w-full pt-4">
+             <button id="btn-cancelar-exclusao" type="button" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center px-6 py-3 rounded-full font-bold shadow-sm border-2 border-gray-300 text-gray-700 bg-white hover:bg-gray-50 transition-all">
+               Cancelar
+             </button>
+             <!-- Botão de Exclusão (RF006 - Passo 6) -->
+             <button id="btn-confirmar-exclusao" type="submit" class="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold shadow-sm transition bg-[#ec4899] text-white border-2 border-transparent hover:bg-pink-700 hover:-translate-y-0.5 hover:shadow-lg">
+               Excluir permanentemente
+             </button>
+           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Dropdown interativo em JS -->
+  <script>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountMenu = document.getElementById('accountMenu');
+    document.addEventListener('click', (e) => {
+      // Abre/Fecha o menu ao clicar no botão
+      if (accountMenuBtn && accountMenuBtn.contains(e.target)) {
+        accountMenu.classList.toggle('opacity-0');
+        accountMenu.classList.toggle('pointer-events-none');
+      } 
+      // Fecha o menu se clicar fora dele
+      else if (accountMenu && !accountMenu.contains(e.target)) {
+        accountMenu.classList.add('opacity-0');
+        accountMenu.classList.add('pointer-events-none');
+      }
+    });
+  </script>
+
+  <!-- 
+    =============================================================
+    *** SCRIPT ATUALIZADO ***
+    Lógica para AMBOS os Modais (RF005c e RF006)
+    =============================================================
+  -->
+  <script>
+    // --- Lógica para MODAL 1: REMOVER ALUNO (RF005c) ---
+    const modalRemover = document.getElementById('modal-remover-aluno');
+    const modalRemoverPanel = document.getElementById('modal-remover-panel');
+    const modalRemoverOverlay = document.getElementById('modal-remover-overlay');
+    const btnConfirmarRemocao = document.getElementById('btn-confirmar-remocao');
+    const btnCancelarRemocao = document.getElementById('btn-cancelar-remocao');
+    const nomeAlunoSpan = document.getElementById('aluno-para-remover-nome');
+    const btnsRemover = document.querySelectorAll('.btn-remover-aluno');
+
+    // Função genérica para fechar modais com transição
+    const fecharModal = (modal, panel) => {
+      if (modal && panel) {
+        modal.classList.add('opacity-0');
+        panel.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 300); // Duração da transição
+      }
+    };
+
+    // Função genérica para abrir modais com transição
+    const abrirModal = (modal, panel) => {
+      if (modal && panel) {
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+          modal.classList.remove('opacity-0');
+          panel.classList.remove('opacity-0', 'scale-95');
+        }, 10); // Pequeno delay
+      }
+    };
+
+    // (RF005 - Passo 15) Listeners para botões "Remover"
+    btnsRemover.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const nome = e.currentTarget.getAttribute('data-aluno-nome');
+        if (nome && nomeAlunoSpan) {
+          nomeAlunoSpan.textContent = nome;
+        }
+        abrirModal(modalRemover, modalRemoverPanel);
+      });
+    });
+
+    // Listeners para fechar o MODAL 1
+    if (btnCancelarRemocao) btnCancelarRemocao.addEventListener('click', () => fecharModal(modalRemover, modalRemoverPanel));
+    if (modalRemoverOverlay) modalRemoverOverlay.addEventListener('click', () => fecharModal(modalRemover, modalRemoverPanel));
+
+    // (RF005 - Passo 17) Ação de confirmar remoção
+    if (btnConfirmarRemocao) {
+      btnConfirmarRemocao.addEventListener('click', () => {
+        console.log('Aluno removido (simulação).');
+        const nomeRemovido = nomeAlunoSpan.textContent;
+        btnsRemover.forEach(btn => {
+          if (btn.getAttribute('data-aluno-nome') === nomeRemovido) {
+            const itemAluno = btn.closest('.flex.flex-wrap.justify-between.items-center');
+            if (itemAluno) {
+              itemAluno.remove();
+            }
+          }
+        });
+        fecharModal(modalRemover, modalRemoverPanel);
+      });
+    }
+
+    // --- Lógica para MODAL 2: EXCLUIR CONTA (RF006) ---
+    const modalExcluir = document.getElementById('modal-excluir-conta');
+    const modalExcluirPanel = document.getElementById('modal-excluir-panel');
+    const modalExcluirOverlay = document.getElementById('modal-excluir-overlay');
+    const btnAbrirModalExcluir = document.getElementById('btn-abrir-modal-excluir');
+    const btnCancelarExclusao = document.getElementById('btn-cancelar-exclusao');
+    const formExcluir = document.getElementById('btn-confirmar-exclusao')?.closest('form');
+
+    // (RF006 - Passo 3) Listener para abrir o modal de exclusão
+    if (btnAbrirModalExcluir) {
+      btnAbrirModalExcluir.addEventListener('click', (e) => {
+        e.preventDefault();
+        abrirModal(modalExcluir, modalExcluirPanel);
+      });
+    }
+
+    // Listeners para fechar o MODAL 2
+    if (btnCancelarExclusao) btnCancelarExclusao.addEventListener('click', () => fecharModal(modalExcluir, modalExcluirPanel));
+    if (modalExcluirOverlay) modalExcluirOverlay.addEventListener('click', () => fecharModal(modalExcluir, modalExcluirPanel));
+
+    // (RF006 - Passo 6) Ação de confirmar exclusão
+    if (formExcluir) {
+      formExcluir.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede o envio real
+        // (RF006 - Passo 7) A validação da senha aconteceria aqui
+        
+        // (FA018: Exemplo de falha na senha)
+        // const senha = document.getElementById('modal-confirma-senha-exclusao').value;
+        // if (senha !== 'senha-correta') {
+        //   alert('A senha está incorreta.'); // Substituir por mensagem de erro no modal
+        //   return;
+        // }
+        
+        // (RF006 - Passo 8, 9, 10) Simulação de sucesso
+        console.log('Conta excluída (simulação).');
+        alert('Sua conta e todos os seus dados foram excluídos com sucesso.'); // (RF006 - Passo 10)
+        // Redireciona para a página inicial (simulação)
+        window.location.href = '#pagina-inicial'; 
+      });
+    }
+
+  </script>
+</body>
+</html>

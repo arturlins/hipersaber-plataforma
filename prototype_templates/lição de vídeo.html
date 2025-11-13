@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Lição</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Base: #FFFFFF (Branco-Neve), #2d3748 (Grafite), #4a5568 (Cinza-Média)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco)
+      - #ec4899 (Rosa-Vibrante)
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho MODO FOCO (Livre de Distrações) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-4 px-8">
+    <div class="w-full max-w-5xl flex items-center justify-between">
+      <!-- O logo é a única âncora, servindo como "Voltar ao Dashboard" -->
+      <a href="#rf021" title="Voltar ao Dashboard do Aluno">
+        <span class="text-3xl font-bold logo-gradient">
+          <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+        </span>
+      </a>
+      <!-- Nenhum menu de conta é exibido intencionalmente -->
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8 flex justify-center">
+    <div class="w-full max-w-5xl mx-auto">
+      
+      <h1 class="text-3xl font-bold mb-6 text-white">Lição 1: O que é Adição?</h1>
+
+      <!-- Player de Vídeo Centralizado -->
+      <!-- 
+        CORREÇÃO: 
+        - Removido: aspect-w-16 aspect-h-9 (não funcionam sem plugin)
+        - Adicionado: relative pt-[56.25%] (cria a proporção 16:9)
+      -->
+      <div class="relative w-full rounded-2xl shadow-2xl overflow-hidden mb-8 bg-black/50 backdrop-blur-md pt-[56.25%]">
+        <!-- 
+          CORREÇÃO: 
+          - Adicionado: absolute top-0 left-0 (para preencher o container)
+        -->
+        <iframe class="absolute top-0 left-0 w-full h-full" 
+                src="https://www.youtube.com/embed/h3sFlP8Rmqc" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+        </iframe>
+      </div>
+
+      <!-- Botões de Navegação -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        
+        <!-- Botão 1: Voltar (Estilo Secundário) - CORRETO -->
+        <a href="#aula-anterior" 
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 
+                  transition-all duration-300 ease-in-out 
+                  hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                  focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Lição Anterior
+        </a>
+        
+        <!-- Botão 2: Voltar ao Dashboard (Estilo Secundário) - CORRIGIDO -->
+        <a href="#rf021" 
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 
+                  transition-all duration-300 ease-in-out 
+                  hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                  focus:outline-none">
+          <!-- Ícone de "grid" para Meus Cursos -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+          </svg>
+          Meus Cursos
+        </a>
+
+        <!-- Botão 3: Próxima Lição (Estilo Secundário) - ADICIONADO DE VOLTA -->
+        <a href="#proxima-aula" 
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 
+                  transition-all duration-300 ease-in-out 
+                  hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                  focus:outline-none">
+          Próxima Lição
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Seção "Materiais de Apoio" (RF024) -->
+      <!-- FA055: Esta seção <div class="backdrop-blur-lg ..."> inteira não deve ser renderizada se não houver materiais. -->
+      <!-- 
+        *** CORREÇÃO APLICADA AQUI ***
+        - Fundo alterado de 'bg-white/95' para 'bg-white/10' para corresponder aos botões (menos distração).
+        - Adicionada uma borda 'border-white/20' para definir o card.
+        - Cores de texto e borda interna ajustadas para branco para manter a legibilidade.
+      -->
+      <div class="backdrop-blur-lg bg-white/10 rounded-2xl shadow-lg overflow-hidden border border-white/20">
+        
+        <!-- Cabeçalho Colapsável (Botão) -->
+        <button id="toggleMaterialsBtn" class="w-full flex justify-between items-center p-6 text-left" aria-expanded="false" aria-controls="materialsContent">
+          <!-- Cor do texto alterada de 'text-[#2d3748]' para 'text-white/90' -->
+          <h2 class="text-2xl font-bold text-white/90">Materiais de Apoio</h2>
+          <!-- Cor do ícone alterada para 'text-white/90' -->
+          <svg id="materialsIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition-transform duration-300 transform text-white/90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <!-- Conteúdo Colapsável (Inicia oculto) -->
+        <!-- Cor da borda alterada de 'border-gray-200' para 'border-white/20' -->
+        <div id="materialsContent" class="hidden px-6 pb-6 border-t border-white/20">
+          <div class="space-y-3 pt-4">
+            
+            <!-- Item de Material (RF024 - Passo 3) -->
+            <!-- Cor do link alterada de 'text-[#3d35a8]' para 'text-white' e hover para 'hover:bg-white/20' -->
+            <a href="#download-mapa" download class="flex items-center gap-3 p-3 rounded-lg text-white font-semibold hover:bg-white/20 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              <span>Mapa Mental - Adição (PDF)</span>
+            </a>
+            
+            <!-- Item de Material (RF024 - Passo 3) -->
+            <!-- Cor do link alterada de 'text-[#3d35a8]' para 'text-white' e hover para 'hover:bg-white/20' -->
+            <a href="#download-podcast" download class="flex items-center gap-3 p-3 rounded-lg text-white font-semibold hover:bg-white/20 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M20 4v16a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2h12a2 2 0 012 2z" />
+              </svg>
+              <span>Podcast - Tabuada (MP3)</span>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé MODO FOCO (Mínimo) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-4 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva
+  </footer>
+
+  <!-- Script para a seção colapsável -->
+  <script>
+    const toggleBtn = document.getElementById('toggleMaterialsBtn');
+    const content = document.getElementById('materialsContent');
+    const icon = document.getElementById('materialsIcon');
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        // Alterna a classe 'hidden' do conteúdo
+        content.classList.toggle('hidden');
+        
+        // Gira o ícone
+        icon.classList.toggle('rotate-180');
+        
+        // Atualiza o atributo aria-expanded
+        const isExpanded = content.classList.contains('hidden') ? 'false' : 'true';
+        toggleBtn.setAttribute('aria-expanded', isExpanded);
+      });
+    }
+  </script>
+</body>
+</html>

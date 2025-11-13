@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Recuperar Senha</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco)
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8 flex flex-col justify-center items-center">
+    
+    <!-- Logo -->
+    <div class="text-center mb-6">
+      <a href="#rf002-login" class="text-4xl font-bold text-white inline-block" title="Voltar à página inicial">
+        <span style="margin-right:4px;">🚀</span> HiperSaber
+      </a>
+    </div>
+
+    <!-- Card de Solicitação (RF003 - Passo 2) -->
+    <div class="w-full max-w-md mx-auto">
+      
+      <!-- Formulário de Solicitação -->
+      <section id="form-container" class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8">
+        <h1 class="text-2xl font-bold text-center text-[#2d3748] mb-4">Recuperar Senha</h1>
+        <p class="text-center text-[#4a5568] mb-6">Digite seu e-mail de cadastro e enviaremos um link para você redefinir sua senha.</p>
+        
+        <form id="form-solicitar">
+          <div class="mb-4">
+            <label for="email-responsavel" class="block text-sm font-medium text-[#4a5568]">Email do Responsável</label>
+            <input type="email" id="email-responsavel" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]" placeholder="seu.email@exemplo.com">
+            <!-- Exemplo de Erro (FA007): 
+            <p class="text-red-600 text-sm mt-1">E-mail não cadastrado no sistema.</p> 
+            -->
+          </div>
+          
+          <button type="submit" class="w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+            Enviar
+          </button>
+        </form>
+      </section>
+
+      <!-- Mensagem de Sucesso (RF003 - Passo 6) - Oculta por padrão -->
+      <section id="mensagem-sucesso" class="hidden backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8 text-center">
+        <div class="text-5xl mb-4">✉️</div>
+        <h1 class="text-2xl font-bold text-[#2d3748] mb-4">Verifique seu e-mail!</h1>
+        <p class="text-[#4a5568]">
+          Um e-mail de redefinição foi enviado para <strong id="email-enviado" class="text-[#3d35a8]"></strong>.
+          Verifique sua caixa de entrada e spam.
+        </p>
+      </section>
+      
+      <!-- Link para Voltar ao Login -->
+      <div class="mt-6 text-center">
+        <a href="#rf002-login" class="text-sm text-white/90 hover:text-white font-medium">
+          &larr; Voltar para o Login
+        </a>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- Script para simular o Passo 6 -->
+  <script>
+    const formContainer = document.getElementById('form-container');
+    const formSolicitar = document.getElementById('form-solicitar');
+    const msgSucesso = document.getElementById('mensagem-sucesso');
+    const emailInput = document.getElementById('email-responsavel');
+    const emailEnviado = document.getElementById('email-enviado');
+
+    if (formSolicitar) {
+      formSolicitar.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede o envio real
+        
+        // Simula o sucesso (RF003 - Passo 6)
+        if (emailInput.value && emailEnviado) {
+          emailEnviado.textContent = emailInput.value;
+          formContainer.classList.add('hidden');
+          msgSucesso.classList.remove('hidden');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

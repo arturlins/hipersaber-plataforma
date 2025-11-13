@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HiperSaber - Educação Inclusiva para Crianças com TDAH</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        min-height: 100vh;
+        opacity: 0;
+        animation: fadeIn 0.6s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+        20%, 40%, 60%, 80% { transform: translateX(10px); }
+      }
+
+      /* Páginas */
+      .page {
+        display: none;
+        min-height: 100vh;
+      }
+
+      .page.active {
+        display: flex;
+        flex-direction: column;
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      /* Header Landing */
+      header {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem 2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        animation: slideDown 0.6s ease-out;
+        backdrop-filter: blur(10px);
+      }
+
+      .header-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn-login {
+        background: transparent;
+        color: #564adc;
+        border: 2px solid #564adc;
+      }
+
+      .btn-login:hover {
+        background: #564adc;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(86, 74, 220, 0.4);
+      }
+
+      .btn-signup {
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        color: white;
+        border: 2px solid transparent;
+      }
+
+      .btn-signup:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(86, 74, 220, 0.5);
+      }
+
+      /* Hero Section */
+      main {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .hero-section {
+        max-width: 1200px;
+        width: 100%;
+        background: white;
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 500px;
+        animation: scaleIn 0.8s ease-out 0.2s backwards;
+      }
+
+      .hero-content {
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        animation: slideUp 0.8s ease-out 0.4s backwards;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+        color: #2d3748;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+
+      .hero-content .highlight {
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      .hero-content p {
+        font-size: 1.1rem;
+        color: #4a5568;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      .hero-image {
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-image::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        top: -100px;
+        right: -100px;
+        animation: rotate 20s linear infinite;
+      }
+
+      .hero-image::after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        bottom: -50px;
+        left: -50px;
+        animation: rotate 15s linear infinite reverse;
+      }
+
+      .banner-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        color: white;
+        animation: slideUp 0.8s ease-out 0.6s backwards;
+      }
+
+      .brain-icon {
+        font-size: 8rem;
+        margin-bottom: 1rem;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .banner-content h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .banner-content p {
+        font-size: 1.2rem;
+        opacity: 0.95;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .feature {
+        text-align: center;
+        padding: 1rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 15px;
+        opacity: 0;
+        animation: slideUp 0.6s ease-out forwards;
+      }
+
+      .feature:nth-child(1) { animation-delay: 0.6s; }
+      .feature:nth-child(2) { animation-delay: 0.7s; }
+      .feature:nth-child(3) { animation-delay: 0.8s; }
+
+      .feature:hover {
+        transform: translateY(-10px);
+        background: rgba(86, 74, 220, 0.05);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+      .feature:hover .feature-icon {
+        transform: scale(1.2) rotate(5deg);
+      }
+
+      .feature h3 {
+        font-size: 1rem;
+        color: #2d3748;
+        margin-bottom: 0.25rem;
+        transition: color 0.3s ease;
+      }
+
+      .feature:hover h3 {
+        color: #564adc;
+      }
+
+      .feature p {
+        font-size: 0.85rem;
+        color: #718096;
+        margin: 0;
+      }
+
+      footer {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.5rem 2rem;
+        text-align: center;
+        color: #4a5568;
+        backdrop-filter: blur(10px);
+        animation: slideUp 0.6s ease-out 0.8s backwards;
+      }
+
+      /* Forms Container */
+      .form-page {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 1rem;
+      }
+
+      .form-container-wrapper {
+        width: 100%;
+        max-width: 42rem;
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        animation: slideUp 0.6s ease-out;
+      }
+
+      .form-container-wrapper.small {
+        max-width: 28rem;
+      }
+
+      .form-header {
+        padding: 2rem;
+        background: linear-gradient(to right, #564adc, #3d35a8);
+        color: white;
+        text-align: center;
+      }
+
+      .form-header h1 {
+        font-size: 1.875rem;
+        font-weight: 700;
+      }
+
+      .form-header p {
+        color: rgba(255, 255, 255, 0.9);
+        margin-top: 0.5rem;
+      }
+
+      .progress-container {
+        margin-top: 1.5rem;
+      }
+
+      .progress-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0.25rem;
+      }
+
+      .progress-bar-bg {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 9999px;
+        height: 0.5rem;
+      }
+
+      .progress-bar {
+        background: white;
+        height: 0.5rem;
+        border-radius: 9999px;
+        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .form-body {
+        padding: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.25rem;
+        opacity: 0;
+        animation: slideUp 0.4s ease-out forwards;
+      }
+
+      .form-group:nth-child(1) { animation-delay: 0.1s; }
+      .form-group:nth-child(2) { animation-delay: 0.15s; }
+      .form-group:nth-child(3) { animation-delay: 0.2s; }
+      .form-group:nth-child(4) { animation-delay: 0.25s; }
+      .form-group:nth-child(5) { animation-delay: 0.3s; }
+
+      label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #334155;
+        margin-bottom: 0.25rem;
+      }
+
+      input, select {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 0.375rem;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: 1rem;
+      }
+
+      input:focus, select:focus {
+        outline: none;
+        border-color: #564adc;
+        box-shadow: 0 0 0 3px rgba(86, 74, 220, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .help-text {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 0.25rem;
+      }
+
+      .checkbox-container {
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        height: 1.25rem;
+      }
+
+      input[type="checkbox"] {
+        width: 1rem;
+        height: 1rem;
+        cursor: pointer;
+      }
+
+      .checkbox-label {
+        margin-left: 0.75rem;
+        font-size: 0.875rem;
+      }
+
+      .checkbox-label a, .link {
+        color: #564adc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .checkbox-label a:hover, .link:hover {
+        color: #3d35a8;
+      }
+
+      .checkbox-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        transition: transform 0.2s ease;
+      }
+
+      .checkbox-group:hover {
+        transform: scale(1.02);
+      }
+
+      .checkbox-group label {
+        margin: 0 0 0 0.5rem;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background: linear-gradient(to right, #564adc, #3d35a8);
+        color: white;
+        border: none;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      }
+
+      .btn-primary:hover {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn-secondary {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #cbd5e1;
+        background: white;
+        color: #334155;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        background: #f8fafc;
+      }
+
+      .btn-outline {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #564adc;
+        background: white;
+        color: #564adc;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-outline:hover {
+        background: #f5f3ff;
+      }
+
+      .button-group {
+        margin-top: 2rem;
+      }
+
+      .button-row {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .button-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .feedback {
+        margin-top: 1rem;
+        text-align: center;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.3s ease-out;
+      }
+
+      .feedback:not(:empty) {
+        animation: slideUp 0.3s ease-out;
+      }
+
+      .feedback.error {
+        background: #fef2f2;
+        color: #991b1b;
+      }
+
+      .feedback.success {
+        background: #f0fdf4;
+        color: #166534;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .register-link {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 0.875rem;
+        color: #64748b;
+        animation: slideUp 0.4s ease-out 0.25s backwards;
+      }
+
+      .register-link a {
+        font-weight: 500;
+        color: #564adc;
+        cursor: pointer;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      /* Modal */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        animation: fadeIn 0.3s ease-out;
+        z-index: 1000;
+      }
+
+      .modal-backdrop.hidden {
+        display: none;
+      }
+
+      .modal-content {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 24rem;
+        padding: 1.5rem;
+        text-align: center;
+        animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .modal-icon {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 9999px;
+        background: #fee2e2;
+      }
+
+      .modal-icon svg {
+        height: 1.5rem;
+        width: 1.5rem;
+        color: #dc2626;
+      }
+
+      .modal-content h3 {
+        margin-top: 1rem;
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: #0f172a;
+      }
+
+      .modal-content .modal-text {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #64748b;
+      }
+
+      .modal-buttons {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .success-icon {
+        margin: 0 auto;
+        height: 3rem;
+        width: 3rem;
+        color: #22c55e;
+      }
+
+      .success-container {
+        text-align: center;
+        padding: 2rem;
+        animation: scaleIn 0.4s ease-out;
+      }
+
+      .success-container h2 {
+        margin-top: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+      }
+
+      .success-container p {
+        margin-top: 0.5rem;
+        color: #475569;
+      }
+
+      .success-container .btn-primary {
+        margin-top: 1.5rem;
+      }
+
+      @media (min-width: 640px) {
+        .button-row {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .button-actions {
+          flex-direction: row;
+          width: auto;
+        }
+
+        .btn-secondary, .btn-outline {
+          width: auto;
+        }
+
+        .modal-buttons {
+          flex-direction: row-reverse;
+        }
+
+        .modal-buttons button {
+          flex: 1;
+        }
+      }
+
+      @media (max-width: 968px) {
+        .hero-section {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-image {
+          min-height: 300px;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header-content {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .auth-buttons {
+          width: 100%;
+        }
+
+        .btn {
+          flex: 1;
+          text-align: center;
+        }
+
+        .hero-content {
+          padding: 2rem;
+        }
+
+        .brain-icon {
+          font-size: 5rem;
+        }
+
+        .banner-content h2 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PÁGINA INICIAL (LANDING) -->
+    <div id="landing-page" class="page active">
+      <header>
+        <div class="header-content">
+          <div class="logo" onclick="navigateTo('landing')">🚀 HiperSaber</div>
+          <div class="auth-buttons">
+            <button class="btn btn-login" onclick="navigateTo('login')">Login</button>
+            <button class="btn btn-signup" onclick="navigateTo('cadastro')">Cadastre-se</button>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <div class="hero-section">
+          <div class="hero-content">
+            <h1>
+              Aprendizado inclusivo para crianças com
+              <span class="highlight">TDAH</span>
+            </h1>
+            <p>
+              Uma plataforma educacional que respeita o ritmo e as necessidades de
+              cada aluno, tornando a matemática acessível e divertida através de
+              objetos de aprendizagem especialmente desenvolvidos.
+            </p>
+
+            <div class="features">
+              <div class="feature">
+                <div class="feature-icon">🎯</div>
+                <h3>Foco</h3>
+                <p>Ambiente livre de distrações</p>
+              </div>
+              <div class="feature">
+                <div class="feature-icon">👨‍👩‍👧</div>
+                <h3>Supervisão</h3>
+                <p>Acompanhamento familiar</p>
+              </div>
+              <div class="feature">
+                <div class="feature-icon">📚</div>
+                <h3>Conteúdo</h3>
+                <p>Objetos de alta qualidade</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-image">
+            <div class="banner-content">
+              <div class="brain-icon">🧠</div>
+              <h2>Potencialize o Saber</h2>
+              <p>Transforme a energia em conhecimento</p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>&copy; 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita</p>
+      </footer>
+    </div>
+
+    <!-- PÁGINA DE CADASTRO -->
+    <div id="cadastro-page" class="page">
+      <div class="form-page">
+        <div class="form-container-wrapper">
+          <div class="form-header">
+            <h1 onclick="navigateTo('landing')" style="cursor: pointer;">🚀 HiperSaber</h1>
+            <p>Plataforma de educação inclusiva</p>
+
+            <div class="progress-container">
+              <div class="progress-label">
+                <span id="step-title">Etapa 1 de 2: Dados do Responsável</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div id="progress-bar" class="progress-bar" style="width: 50%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-body">
+            <form id="signup-form" novalidate>
+              <div id="step1">
+                <div class="form-group">
+                  <label for="responsavel-nome">Nome Completo do Responsável</label>
+                  <input type="text" id="responsavel-nome" required minlength="3" placeholder="Seu nome completo" />
+                </div>
+                <div class="form-group">
+                  <label for="responsavel-email">Email do Responsável</label>
+                  <input type="email" id="responsavel-email" required placeholder="voce@email.com" />
+                </div>
+                <div class="form-group">
+                  <label for="responsavel-senha">Senha</label>
+                  <input type="password" id="responsavel-senha" required placeholder="Mínimo 8 caracteres" />
+                  <p class="help-text">Deve conter no mínimo 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial (@#$%&*).</p>
+                </div>
+                <div class="form-group">
+                  <label for="responsavel-confirma-senha">Confirmação da Senha</label>
+                  <input type="password" id="responsavel-confirma-senha" required placeholder="Repita a senha" />
+                </div>
+                <div class="form-group checkbox-container">
+                  <div class="checkbox-wrapper">
+                    <input id="termos" type="checkbox" required />
+                  </div>
+                  <div class="checkbox-label">
+                    <label for="termos">Eu concordo com os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>.</label>
+                  </div>
+                </div>
+                <div class="button-group">
+                  <button type="button" id="next-step-btn" class="btn-primary">Criar Conta e Cadastrar Aluno</button>
+                </div>
+              </div>
+
+              <div id="step2" class="hidden">
+                <div class="form-group">
+                  <label for="aluno-nome">Nome ou Apelido do Aluno</label>
+                  <input type="text" id="aluno-nome" required minlength="3" placeholder="Como devemos chamar o aluno?" />
+                </div>
+                <div class="form-group">
+                  <label for="aluno-ano">Ano Escolar</label>
+                  <select id="aluno-ano" required>
+                    <option value="" disabled selected>Selecione o ano escolar</option>
+                    <option value="1">1º Ano do Ensino Fundamental</option>
+                    <option value="2">2º Ano do Ensino Fundamental</option>
+                    <option value="3">3º Ano do Ensino Fundamental</option>
+                    <option value="4">4º Ano do Ensino Fundamental</option>
+                    <option value="5">5º Ano do Ensino Fundamental</option>
+                    <option value="6">6º Ano do Ensino Fundamental</option>
+                    <option value="7">7º Ano do Ensino Fundamental</option>
+                    <option value="8">8º Ano do Ensino Fundamental</option>
+                    <option value="9">9º Ano do Ensino Fundamental</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="aluno-tdah">Tipo de TDAH</label>
+                  <select id="aluno-tdah" required>
+                    <option value="" disabled selected>Selecione o tipo</option>
+                    <option value="desatento">Predominantemente Desatento</option>
+                    <option value="hiperativo">Predominantemente Hiperativo/Impulsivo</option>
+                    <option value="combinado">Combinado</option>
+                    <option value="nao-sei">Não sei informar / Prefiro não dizer</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="aluno-nascimento">Data de Nascimento do Aluno</label>
+                  <input type="text" id="aluno-nascimento" placeholder="DD/MM/AAAA" />
+                </div>
+                <div class="button-group">
+                  <div class="button-row">
+                    <button type="button" id="prev-step-btn" class="btn-secondary">Voltar</button>
+                    <div class="button-actions">
+                      <button type="button" id="add-another-student-btn" class="btn-outline">Adicionar Outro Aluno</button>
+                      <button type="submit" id="finish-btn" class="btn-primary">Concluir Cadastro</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div id="feedback-cadastro" class="feedback"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PÁGINA DE LOGIN -->
+    <div id="login-page" class="page">
+      <div class="form-page">
+        <div class="form-container-wrapper small">
+          <div class="form-header">
+            <h1 onclick="navigateTo('landing')" style="cursor: pointer;">🚀 HiperSaber</h1>
+            <p>Bem-vindo(a) de volta!</p>
+          </div>
+
+          <div class="form-body">
+            <form id="login-form" novalidate>
+              <div class="form-group">
+                <label for="email">Email do Responsável</label>
+                <input type="email" id="email" required placeholder="voce@email.com" />
+              </div>
+              <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" required placeholder="Sua senha" />
+              </div>
+              <div class="form-group checkbox-row">
+                <div class="checkbox-group">
+                  <input id="manter-conectado" type="checkbox" />
+                  <label for="manter-conectado">Manter-me conectado</label>
+                </div>
+                <a href="#" class="link">Esqueci a minha senha</a>
+              </div>
+              <div class="button-group">
+                <button type="submit" class="btn-primary">Entrar</button>
+              </div>
+              <div class="register-link">
+                <p>Não tem uma conta? <a onclick="navigateTo('cadastro')">Cadastre-se</a></p>
+              </div>
+            </form>
+            <div id="feedback-login" class="feedback"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE ERRO -->
+    <div id="error-modal" class="modal-backdrop hidden">
+      <div class="modal-content">
+        <div class="modal-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <h3>Acesso Negado</h3>
+        <p class="modal-text">E-mail ou senha inválidos. Por favor, tente novamente ou faça o cadastro na plataforma.</p>
+        <div class="modal-buttons">
+          <button type="button" id="try-again-btn" class="btn-primary">Tentar Novamente</button>
+          <button type="button" id="go-to-register-btn" class="btn-secondary">Fazer Cadastro</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sistema de navegação entre páginas
+      function navigateTo(page) {
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(p => p.classList.remove('active'));
+        
+        const targetPage = document.getElementById(page + '-page');
+        if (targetPage) {
+          targetPage.classList.add('active');
+          window.scrollTo(0, 0);
+        }
+      }
+
+      // LÓGICA DO CADASTRO
+      document.addEventListener("DOMContentLoaded", () => {
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const nextStepBtn = document.getElementById("next-step-btn");
+        const prevStepBtn = document.getElementById("prev-step-btn");
+        const signupForm = document.getElementById("signup-form");
+        const feedbackCadastro = document.getElementById("feedback-cadastro");
+        const progressBar = document.getElementById("progress-bar");
+        const stepTitle = document.getElementById("step-title");
+
+        const responsavelNome = document.getElementById("responsavel-nome");
+        const responsavelEmail = document.getElementById("responsavel-email");
+        const responsavelSenha = document.getElementById("responsavel-senha");
+        const responsavelConfirmaSenha = document.getElementById("responsavel-confirma-senha");
+        const termos = document.getElementById("termos");
+        const alunoFormFields = document.querySelectorAll("#step2 input, #step2 select");
+
+        const validateStep1 = () => {
+          clearFeedback('cadastro');
+          if (responsavelNome.value.length < 3) {
+            showFeedback("O nome completo do responsável deve ter ao menos 3 caracteres.", "error", 'cadastro');
+            return false;
+          }
+
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(responsavelEmail.value)) {
+            showFeedback("Por favor, insira um e-mail válido.", "error", 'cadastro');
+            return false;
+          }
+
+          const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+          if (!senhaRegex.test(responsavelSenha.value)) {
+            showFeedback("A senha não atende aos requisitos de segurança.", "error", 'cadastro');
+            return false;
+          }
+
+          if (responsavelSenha.value !== responsavelConfirmaSenha.value) {
+            showFeedback("As senhas não conferem.", "error", 'cadastro');
+            return false;
+          }
+
+          if (!termos.checked) {
+            showFeedback("Você deve concordar com os Termos de Uso e a Política de Privacidade.", "error", 'cadastro');
+            return false;
+          }
+
+          return true;
+        };
+
+        const validateStep2 = () => {
+          clearFeedback('cadastro');
+          const alunoNome = document.getElementById("aluno-nome");
+          const alunoAno = document.getElementById("aluno-ano");
+          const alunoTdah = document.getElementById("aluno-tdah");
+
+          if (alunoNome.value.length < 3) {
+            showFeedback("O nome ou apelido do aluno deve ter ao menos 3 caracteres.", "error", 'cadastro');
+            return false;
+          }
+
+          if (!alunoAno.value) {
+            showFeedback("O ano escolar do aluno é obrigatório.", "error", 'cadastro');
+            return false;
+          }
+
+          if (!alunoTdah.value) {
+            showFeedback("A seleção do tipo de TDAH é obrigatória.", "error", 'cadastro');
+            return false;
+          }
+
+          return true;
+        };
+
+        const animateTransition = (hideEl, showEl) => {
+          hideEl.style.opacity = '0';
+          hideEl.style.transform = 'translateY(-20px)';
+          setTimeout(() => {
+            hideEl.classList.add('hidden');
+            hideEl.style.opacity = '1';
+            hideEl.style.transform = 'translateY(0)';
+            showEl.classList.remove('hidden');
+          }, 300);
+        };
+
+        nextStepBtn.addEventListener("click", () => {
+          if (validateStep1()) {
+            animateTransition(step1, step2);
+            progressBar.style.width = "100%";
+            stepTitle.textContent = "Etapa 2 de 2: Dados do Aluno";
+            showFeedback("Conta do responsável criada! Agora, cadastre o aluno.", "success", 'cadastro');
+          }
+        });
+
+        prevStepBtn.addEventListener("click", () => {
+          animateTransition(step2, step1);
+          progressBar.style.width = "50%";
+          stepTitle.textContent = "Etapa 1 de 2: Dados do Responsável";
+          clearFeedback('cadastro');
+        });
+
+        const nascimentoInput = document.getElementById("aluno-nascimento");
+        nascimentoInput.addEventListener("input", (e) => {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length > 8) value = value.slice(0, 8);
+          if (value.length > 4) {
+            value = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4)}`;
+          } else if (value.length > 2) {
+            value = `${value.slice(0, 2)}/${value.slice(2)}`;
+          }
+          e.target.value = value;
+        });
+
+        const addAnotherStudentBtn = document.getElementById("add-another-student-btn");
+        addAnotherStudentBtn.addEventListener("click", () => {
+          if (validateStep2()) {
+            const alunoNomeValue = document.getElementById("aluno-nome").value;
+            showFeedback(`Aluno(a) "${alunoNomeValue}" adicionado com sucesso! Preencha os dados para o próximo.`, "success", 'cadastro');
+            alunoFormFields.forEach((field) => {
+              if (field.tagName === "SELECT") {
+                field.selectedIndex = 0;
+              } else {
+                field.value = "";
+              }
+            });
+            document.getElementById("aluno-nome").focus();
+          }
+        });
+
+        signupForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (validateStep2()) {
+            signupForm.style.opacity = '0';
+            signupForm.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              signupForm.innerHTML = `<div class="success-container">
+                <svg class="success-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h2>Cadastro Concluído!</h2>
+                <p>Seu cadastro e o perfil do aluno foram criados com sucesso. Você será redirecionado para a plataforma.</p>
+                <button class="btn-primary" onclick="navigateTo('login')">Acessar Plataforma</button>
+              </div>`;
+              signupForm.style.opacity = '1';
+              signupForm.style.transform = 'scale(1)';
+              stepTitle.textContent = "Concluído!";
+            }, 300);
+          }
+        });
+
+        // LÓGICA DO LOGIN
+        const loginForm = document.getElementById("login-form");
+        const errorModal = document.getElementById("error-modal");
+        const tryAgainBtn = document.getElementById("try-again-btn");
+        const goToRegisterBtn = document.getElementById("go-to-register-btn");
+        const feedbackLogin = document.getElementById("feedback-login");
+        const emailInput = document.getElementById("email");
+        const senhaInput = document.getElementById("senha");
+
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          clearFeedback('login');
+
+          const email = emailInput.value;
+          const senha = senhaInput.value;
+
+          if (!email || !senha) {
+            showFeedback("Por favor, preencha o e-mail e a senha.", "error", 'login');
+            loginForm.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => loginForm.style.animation = '', 500);
+            return;
+          }
+
+          const submitBtn = loginForm.querySelector('button[type="submit"]');
+          const originalText = submitBtn.textContent;
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span style="display: inline-block; animation: rotate 1s linear infinite;">⏳</span> Entrando...';
+
+          setTimeout(() => {
+            if (email === "responsavel@email.com" && senha === "SenhaValida123@") {
+              loginForm.style.opacity = '0';
+              loginForm.style.transform = 'scale(0.95)';
+              setTimeout(() => {
+                loginForm.innerHTML = `<div class="success-container">
+                  <svg class="success-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <h2>Login bem-sucedido!</h2>
+                  <p>Você será redirecionado para a plataforma em instantes.</p>
+                </div>`;
+                loginForm.style.opacity = '1';
+                loginForm.style.transform = 'scale(1)';
+              }, 300);
+            } else {
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+              errorModal.classList.remove("hidden");
+              loginForm.style.animation = 'shake 0.5s ease-in-out';
+              setTimeout(() => loginForm.style.animation = '', 500);
+            }
+          }, 800);
+        });
+
+        tryAgainBtn.addEventListener("click", () => {
+          errorModal.style.opacity = '0';
+          setTimeout(() => {
+            errorModal.classList.add("hidden");
+            errorModal.style.opacity = '1';
+            senhaInput.value = "";
+            emailInput.focus();
+          }, 300);
+        });
+
+        goToRegisterBtn.addEventListener("click", () => {
+          errorModal.classList.add("hidden");
+          navigateTo('cadastro');
+        });
+
+        // Funções auxiliares
+        function showFeedback(message, type, page) {
+          const feedback = document.getElementById(`feedback-${page}`);
+          feedback.textContent = message;
+          feedback.className = `feedback ${type}`;
+        }
+
+        function clearFeedback(page) {
+          const feedback = document.getElementById(`feedback-${page}`);
+          feedback.textContent = "";
+          feedback.className = "feedback";
+        }
+      });
+    </script>
+  </body>
+</html>

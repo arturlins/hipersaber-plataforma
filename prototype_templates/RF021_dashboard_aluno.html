@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Dashboard de Aluno</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    /* Estilo do botão gradiente, copiado da home */
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    a.card-link {
+      text-decoration: none;
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Base: #FFFFFF (Branco-Neve), #2d3748 (Grafite), #4a5568 (Cinza-Médio)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco) -> Usado no hover secundário e nomes
+      - #ec4899 (Rosa-Vibrante) -> Usado em ícones
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho Padrão (ID HiperSaber) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-6 px-8">
+    <div class="w-full max-w-screen-lg flex items-center justify-between">
+      <span class="text-3xl font-bold logo-gradient">
+        <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+      </span>
+      <nav>
+        <div class="relative">
+          <!-- Botão "Minha Conta" (Estilo Principal) -->
+          <button id="accountMenuBtn"
+                  class="flex items-center gap-2 px-8 py-3 rounded-full font-semibold shadow-sm focus:outline-none transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg"
+                  aria-haspopup="true" aria-expanded="false">
+            <span class="hidden sm:inline">Minha Conta</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.657 0 3.234.267 4.712.763M12 7a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </button>
+          <!-- Dropdown Menu -->
+          <div id="accountMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg transition duration-200 opacity-0 pointer-events-none z-50" tabindex="-1">
+            <ul class="py-2">
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 transition">Meus Dados</a>
+              </li>
+              <li>
+                <a href="#rf020" class="block px-4 py-2 hover:bg-gray-100 transition">Mudar Perfil de Aluno</a>
+              </li>
+              <li>
+                <hr class="my-1 border-gray-200" />
+              </li>
+              <li>
+                <a href="#rf001" class="block px-4 py-2 text-[#ec4899] hover:bg-pink-50 transition">Sair</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8">
+    <div class="max-w-screen-lg mx-auto">
+      
+      <!-- Título Personalizado (RF021 - Passo 1) -->
+      <h1 class="text-3xl font-bold mb-8 text-white">
+        Dashboard de <span class="text-[#00f5d4]">João Silva</span>
+      </h1>
+
+      <!-- Seção "Meus Cursos" (RF021 - Passo 2) -->
+      <section id="meus-cursos" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-white">Meus Cursos</h2>
+        
+        <!-- Grid de Cursos Matriculados -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1: Matemática Divertida -->
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg overflow-hidden flex flex-col">
+            <img src="https://placehold.co/600x400/564adc/white?text=Matemática" alt="Capa do curso de Matemática" class="w-full h-40 object-cover">
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold text-[#2d3748] mb-2">Matemática Divertida</h3>
+              <p class="text-[#4a5568] text-sm mb-4 flex-1">Foco em adição e subtração com atividades lúdicas.</p>
+              
+              <!-- Barra de Progresso -->
+              <div class="mb-2">
+                <div class="flex justify-between text-sm font-medium text-[#4a5568] mb-1">
+                  <span>Progresso</span>
+                  <span class="font-bold text-[#3d35a8]">60%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-[#564adc] h-2.5 rounded-full" style="width: 60%"></div>
+                </div>
+              </div>
+              
+              <!-- Botão (Estilo Principal) -->
+              <a href="#rf024" class="mt-4 w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+                Continuar Curso
+              </a>
+            </div>
+          </div>
+          
+          <!-- Card 2: Mundo das Formas -->
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg overflow-hidden flex flex-col">
+            <img src="https://placehold.co/600x400/ec4899/white?text=Geometria" alt="Capa do curso de Geometria" class="w-full h-40 object-cover">
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold text-[#2d3748] mb-2">Mundo das Formas</h3>
+              <p class="text-[#4a5568] text-sm mb-4 flex-1">Conhecendo quadrados, círculos e triângulos.</p>
+              
+              <!-- Barra de Progresso -->
+              <div class="mb-2">
+                <div class="flex justify-between text-sm font-medium text-[#4a5568] mb-1">
+                  <span>Progresso</span>
+                  <span class="font-bold text-[#3d35a8]">25%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-[#564adc] h-2.5 rounded-full" style="width: 25%"></div>
+                </div>
+              </div>
+              
+              <!-- Botão (Estilo Principal) -->
+              <a href="#rf024" class="mt-4 w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+                Continuar Curso
+              </a>
+            </div>
+          </div>
+          
+          <!-- 
+            =============================================================
+            INÍCIO: Fluxo Alternativo FA048 (Aluno sem matrículas)
+            Descomente este bloco e remova o grid acima se
+            o aluno não tiver cursos.
+            =============================================================
+            
+            <div class="col-span-1 md:col-span-2 lg:col-span-3">
+              <div class="backdrop-blur-lg bg-white/10 rounded-2xl p-8 text-center border border-white/20">
+                <span class="text-5xl mb-4 block">📚</span>
+                <p class="text-white/90 text-lg"><strong>João Silva</strong> ainda não está matriculado em nenhum curso.</p>
+                <p class="text-white/70">Explore o catálogo abaixo para começar a jornada!</p>
+              </div>
+            </div>
+            
+            =============================================================
+            FIM: Fluxo Alternativo FA048
+            =============================================================
+          -->
+          
+        </div>
+      </section>
+
+      <!-- Seção "Cursos Disponíveis" (RF021 - Passo 3) -->
+      <section id="cursos-disponiveis">
+        <h2 class="text-2xl font-bold mb-6 text-white">Cursos Disponíveis</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 3: Aventura dos Números -->
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg overflow-hidden flex flex-col">
+            <img src="https://placehold.co/600x400/00f5d4/2d3748?text=Aventura" alt="Capa do curso Aventura dos Números" class="w-full h-40 object-cover">
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold text-[#2d3748] mb-2">Aventura dos Números</h3>
+              <p class="text-[#4a5568] text-sm mb-4 flex-1">Introdução à multiplicação e divisão de forma interativa.</p>
+              
+              <!-- Botão (Estilo Secundário) -->
+              <a href="#rf021-detalhes" 
+                 class="mt-4 w-full text-center inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white 
+                        transition-all duration-300 ease-in-out 
+                        hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                        focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Ver detalhes
+              </a>
+            </div>
+          </div>
+          
+          <!-- Card 4: Detetives da Lógica -->
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg overflow-hidden flex flex-col">
+            <img src="https://placehold.co/600x400/fde047/2d3748?text=Lógica" alt="Capa do curso Detetives da Lógica" class="w-full h-40 object-cover">
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold text-[#2d3748] mb-2">Detetives da Lógica</h3>
+              <p class="text-[#4a5568] text-sm mb-4 flex-1">Resolvendo problemas e quebra-cabeças que estimulam o foco.</p>
+              
+              <!-- Botão (Estilo Secundário) -->
+              <a href="#rf021-detalhes" 
+                 class="mt-4 w-full text-center inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white 
+                        transition-all duration-300 ease-in-out 
+                        hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                        focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                Ver detalhes
+              </a>
+            </div>
+          </div>
+
+          <!-- 
+            =============================================================
+            INÍCIO: Fluxo Alternativo FA049 (Nenhum curso novo)
+            Descomente este bloco e remova o grid acima se
+            o aluno já estiver matriculado em tudo.
+            =============================================================
+            
+            <div class="col-span-1 md:col-span-2 lg:col-span-3">
+              <div class="backdrop-blur-lg bg-white/10 rounded-2xl p-8 text-center border border-white/20">
+                <span class="text-5xl mb-4 block">🏆</span>
+                <p class="text-white/90 text-lg">Parabéns! <strong>João Silva</strong> já está em todos os cursos.</p>
+                <p class="text-white/70">Fique de olho, novos conteúdos chegam em breve!</p>
+              </div>
+            </div>
+            
+            =============================================================
+            FIM: Fluxo Alternativo FA049
+            =============================================================
+          -->
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Rodapé Padrão (ID HiperSaber) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-6 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita
+  </footer>
+
+  <!-- Dropdown interativo em JS -->
+  <script>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountMenu = document.getElementById('accountMenu');
+    document.addEventListener('click', (e) => {
+      // Abre/Fecha o menu ao clicar no botão
+      if (accountMenuBtn.contains(e.target)) {
+        accountMenu.classList.toggle('opacity-0');
+        accountMenu.classList.toggle('pointer-events-none');
+      } 
+      // Fecha o menu se clicar fora dele
+      else if (!accountMenu.contains(e.target)) {
+        accountMenu.classList.add('opacity-0');
+        accountMenu.classList.add('pointer-events-none');
+      }
+    });
+  </script>
+</body>
+</html>

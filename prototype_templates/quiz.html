@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Lição (Quiz)</title>
+  <!-- Carrega o plugin 'typography' para a classe 'prose' -->
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    /* Classe para a opção selecionada */
+    .opcao-selecionada {
+      border-color: #564adc;
+      background-color: #564adc15; /* Fundo roxo 15% opaco */
+      box-shadow: 0 0 0 3px #564adc60; /* Anel roxo 60% opaco */
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho MODO FOCO (Livre de Distrações) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-4 px-8">
+    <div class="w-full max-w-5xl flex items-center justify-between">
+      <a href="#rf021" title="Voltar ao Dashboard do Aluno">
+        <span class="text-3xl font-bold logo-gradient">
+          <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8 flex justify-center">
+    <div class="w-full max-w-3xl mx-auto">
+      
+      <!-- Card da Lição (Quiz) (RF025 - Passo 3) -->
+      <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-6 sm:p-10">
+        
+        <div class="prose prose-lg max-w-none text-[#2d3748]">
+          <h1>🧩 Atividade: Números Primos</h1>
+          <p class="lead">Vamos testar o que você aprendeu na última lição!</p>
+          
+          <!-- Pergunta do Quiz -->
+          <div id="quiz-container">
+            <h2 class="text-xl font-bold text-[#2d3748] mb-4">
+              Baseado no que você aprendeu, qual destes números é um NÚMERO PRIMO?
+            </h2>
+            
+            <div id="opcoes-quiz" class="space-y-4">
+              <!-- Opção 1 (Incorreta) -->
+              <div class="quiz-opcao p-5 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:border-[#564adc]" data-value="6">
+                <span class="text-2xl font-bold">6</span>
+                <!-- *** CORREÇÃO APLICADA AQUI *** -->
+                <p class="text-sm text-[#4a5568]">Porque 6 ÷ 2 = 3.</p>
+                <div class="feedback-container mt-2 text-lg font-bold"></div>
+              </div>
+              
+              <!-- Opção 2 (Correta) -->
+              <div class="quiz-opcao p-5 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:border-[#564adc]" data-value="5" data-correta="true">
+                <span class="text-2xl font-bold">5</span>
+                <p class="text-sm text-[#4a5568]">Porque só dá para dividir por 1 e por 5.</p>
+                <div class="feedback-container mt-2 text-lg font-bold"></div>
+              </div>
+
+              <!-- Opção 3 (Incorreta) -->
+              <div class="quiz-opcao p-5 border-2 border-gray-300 rounded-lg cursor-pointer transition-all duration-200 hover:border-[#564adc]" data-value="1">
+                <span class="text-2xl font-bold">1</span>
+                <p class="text-sm text-[#4a5568]">Porque só dá para dividir por 1.</p>
+                <div class="feedback-container mt-2 text-lg font-bold"></div>
+              </div>
+            </div>
+
+            <!-- Botão de Envio (RF025 - Passo 5) -->
+            <button id="btnEnviarQuiz" 
+                    class="mt-8 w-full text-center px-6 py-4 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg
+                           disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled>
+              Enviar Resposta
+            </button>
+            
+            <!-- Mensagem de Sucesso (RF025 - Passo 8) - Oculta por padrão -->
+            <div id="msgSucessoQuiz" class="hidden mt-6 p-4 rounded-lg bg-green-100 border border-green-300 text-center">
+              <span class="font-bold text-green-700">🏆 Atividade Concluída com Sucesso!</span>
+              <p class="text-green-600 text-sm">Você já pode avançar para a próxima lição.</p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Botões de Navegação -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
+        <a href="#aula-anterior" 
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Lição Anterior
+        </a>
+        
+        <a href="#rf021" 
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+          </svg>
+          Meus Cursos
+        </a>
+
+        <!-- (RF025 - Passo 8) Botão "Próxima Lição" inicia desabilitado -->
+        <a href="#proxima-aula" id="btnProximaLicao"
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 
+                  transition-all duration-300 ease-in-out 
+                  hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                  focus:outline-none 
+                  opacity-50 cursor-not-allowed"
+           aria-disabled="true" onclick="return false;">
+          Próxima Lição
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé MODO FOCO (Mínimo) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-4 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva
+  </footer>
+
+  <!-- Script para a lógica do Quiz (RF025) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const opcoes = document.querySelectorAll('.quiz-opcao');
+      const btnEnviar = document.getElementById('btnEnviarQuiz');
+      const btnProxima = document.getElementById('btnProximaLicao');
+      const msgSucesso = document.getElementById('msgSucessoQuiz');
+      let selecionada = null;
+      let quizConcluido = false;
+
+      // (RF025 - Passo 4) Lidar com a seleção de opção
+      opcoes.forEach(opcao => {
+        opcao.addEventListener('click', () => {
+          if (quizConcluido) return; // Não permite mudar após enviar
+
+          // Remove a seleção de outras
+          opcoes.forEach(o => o.classList.remove('opcao-selecionada'));
+          
+          // Adiciona seleção na clicada
+          opcao.classList.add('opcao-selecionada');
+          selecionada = opcao;
+          
+          // Ativa o botão de envio
+          btnEnviar.disabled = false;
+        });
+      });
+
+      // (RF025 - Passo 5) Lidar com o envio
+      btnEnviar.addEventListener('click', () => {
+        if (!selecionada || quizConcluido) return;
+        
+        quizConcluido = true;
+        btnEnviar.classList.add('hidden'); // Esconde o botão de envio
+        
+        const eCorreta = selecionada.getAttribute('data-correta') === 'true';
+
+        // (RF025 - Passo 5) Mostra feedback
+        opcoes.forEach(opcao => {
+          const feedbackEl = opcao.querySelector('.feedback-container');
+          const eEstaOpcaoCorreta = opcao.getAttribute('data-correta') === 'true';
+
+          if (opcao === selecionada) {
+            if (eCorreta) {
+              feedbackEl.textContent = '✅ Correto!';
+              feedbackEl.className = 'feedback-container mt-2 text-lg font-bold text-green-600';
+              opcao.classList.add('border-green-500');
+            } else {
+              feedbackEl.textContent = '❌ Incorreto.';
+              feedbackEl.className = 'feedback-container mt-2 text-lg font-bold text-red-600';
+              opcao.classList.add('border-red-500');
+            }
+          } else if (eEstaOpcaoCorreta) {
+            // Mostra a correta se o usuário errou
+            if (!eCorreta) {
+              feedbackEl.textContent = '👈 Esta era a resposta correta.';
+              feedbackEl.className = 'feedback-container mt-2 text-lg font-bold text-green-600';
+              opcao.classList.add('border-green-500', 'bg-green-50');
+            }
+          }
+          // Remove a interatividade
+          opcao.classList.remove('cursor-pointer', 'hover:border-[#564adc]');
+          opcao.classList.add('cursor-not-allowed');
+        });
+
+        // (RF025 - Passo 7 e 8)
+        // O registro no LessonProgress (Passo 7) ocorreria no backend aqui.
+        
+        // (Passo 8) Mostra mensagem de sucesso e ativa o botão "Próxima Lição"
+        msgSucesso.classList.remove('hidden');
+        btnProxima.classList.remove('opacity-50', 'cursor-not-allowed');
+        btnProxima.setAttribute('aria-disabled', 'false');
+        btnProxima.onclick = null; // Remove o bloqueio de clique
+      });
+    });
+  </script>
+</body>
+</html>

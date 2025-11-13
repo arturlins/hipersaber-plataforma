@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HiperSaber - Cadastro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#564adc",
+              "primary-dark": "#3d35a8",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      }
+      .progress-bar {
+        transition: width 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center min-h-screen p-4">
+    <div
+      class="w-full max-w-2xl bg-white rounded-xl shadow-2xl overflow-hidden"
+    >
+      <!-- Cabeçalho com Logo e Barra de Progresso -->
+      <div class="p-6 bg-gradient-to-r from-primary to-primary-dark text-white">
+        <h1 class="text-3xl font-bold text-center">🚀 HiperSaber</h1>
+        <p class="text-center text-white/90 mt-2">
+          Plataforma de educação inclusiva
+        </p>
+
+        <!-- Barra de Progresso -->
+        <div class="mt-6">
+          <div
+            class="flex justify-between text-sm font-medium text-white/90 mb-1"
+          >
+            <span id="step-title">Etapa 1 de 2: Dados do Responsável</span>
+          </div>
+          <div class="w-full bg-white/30 rounded-full h-2">
+            <div
+              id="progress-bar"
+              class="bg-white h-2 rounded-full progress-bar"
+              style="width: 50%"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulário -->
+      <div class="p-8">
+        <form id="signup-form" novalidate>
+          <!-- ETAPA 1: Cadastro do Responsável -->
+          <div id="step1">
+            <div class="space-y-5">
+              <div>
+                <label
+                  for="responsavel-nome"
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  >Nome Completo do Responsável</label
+                >
+                <input
+                  type="text"
+                  id="responsavel-nome"
+                  name="responsavel-nome"
+                  required
+                  minlength="3"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="Seu nome completo"
+                />
+              </div>
+              <div>
+                <label
+                  for="responsavel-email"
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  >Email do Responsável</label
+                >
+                <input
+                  type="email"
+                  id="responsavel-email"
+                  name="responsavel-email"
+                  required
+                  class="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="voce@email.com"
+                />
+              </div>
+              <div>
+                <label
+                  for="responsavel-senha"
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  >Senha</label
+                >
+                <input
+                  type="password"
+                  id="responsavel-senha"
+                  name="responsavel-senha"
+                  required
+                  class="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="Mínimo 8 caracteres"
+                />
+                <p class="text-xs text-slate-500 mt-1">
+                  Deve conter no mínimo 8 caracteres, uma letra maiúscula, uma
+                  minúscula, um número e um caractere especial (@#$%&*).
+                </p>
+              </div>
+              <div>
+                <label
+                  for="responsavel-confirma-senha"
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  >Confirmação da Senha</label
+                >
+                <input
+                  type="password"
+                  id="responsavel-confirma-senha"
+                  name="responsavel-confirma-senha"
+                  required
+                  class="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="Repita a senha"
+                />
+              </div>
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input
+                    id="termos"
+                    name="termos"
+                    type="checkbox"
+                    required
+                    class="focus:ring-primary h-4 w-4 text-primary border-slate-300 rounded"
+                  />
+                </div>
+                <div class="ml-3 text-sm">
+                  <label for="termos" class="font-medium text-slate-700"
+                    >Eu concordo com os
+                    <a href="#" class="text-primary hover:text-primary-dark"
+                      >Termos de Uso</a
+                    >
+                    e a
+                    <a href="#" class="text-primary hover:text-primary-dark"
+                      >Política de Privacidade</a
+                    >.</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="mt-8">
+              <button
+                type="button"
+                id="next-step-btn"
+                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-primary to-primary-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all"
+              >
+                Criar Conta e Cadastrar Aluno
+              </button>
+            </div>
+          </div>
+
+          <!-- ETAPA 2: Cadastro do Aluno -->
+          <div id="step2" class="hidden">
+            <div class="space-y-5">
+              <div>
+                <label
+                  for="aluno-nome"
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  >Nome ou Apelido do Aluno</label
+                >
+                <input
+                  type="text"
+                  id="aluno-nome"
+                  name="aluno-nome"
+                  required
+                  minlength="3"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="Como devemos chamar o aluno?"
+                />
+              </div>
+              <div>
+                <label
+                  for="aluno-ano"
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  >Ano Escolar</label
+                >
+                <select
+                  id="aluno-ano"
+                  name="aluno-ano"
+                  required
+                  class="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                >
+                  <option value="" disabled selected>
+                    Selecione o ano escolar
+                  </option>
+                  <option value="1">1º Ano do Ensino Fundamental</option>
+                  <option value="2">2º Ano do Ensino Fundamental</option>
+                  <option value="3">3º Ano do Ensino Fundamental</option>
+                  <option value="4">4º Ano do Ensino Fundamental</option>
+                  <option value="5">5º Ano do Ensino Fundamental</option>
+                  <option value="6">6º Ano do Ensino Fundamental</option>
+                  <option value="7">7º Ano do Ensino Fundamental</option>
+                  <option value="8">8º Ano do Ensino Fundamental</option>
+                  <option value="9">9º Ano do Ensino Fundamental</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  for="aluno-tdah"
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  >Tipo de TDAH</label
+                >
+                <select
+                  id="aluno-tdah"
+                  name="aluno-tdah"
+                  required
+                  class="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                >
+                  <option value="" disabled selected>Selecione o tipo</option>
+                  <option value="desatento">Predominantemente Desatento</option>
+                  <option value="hiperativo">
+                    Predominantemente Hiperativo/Impulsivo
+                  </option>
+                  <option value="combinado">Combinado</option>
+                  <option value="nao-sei">
+                    Não sei informar / Prefiro não dizer
+                  </option>
+                </select>
+              </div>
+              <div>
+                <label
+                  for="aluno-nascimento"
+                  class="block text-sm font-medium text-slate-700 mb-1"
+                  >Data de Nascimento do Aluno</label
+                >
+                <input
+                  type="text"
+                  id="aluno-nascimento"
+                  name="aluno-nascimento"
+                  class="w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                  placeholder="DD/MM/AAAA"
+                />
+              </div>
+            </div>
+            <div
+              class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+            >
+              <!-- Botão Voltar -->
+              <button
+                type="button"
+                id="prev-step-btn"
+                class="w-full sm:w-auto flex justify-center py-3 px-4 border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                Voltar
+              </button>
+
+              <!-- Grupo de Botões de Ação -->
+              <div
+                class="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-4"
+              >
+                <button
+                  type="button"
+                  id="add-another-student-btn"
+                  class="w-full sm:w-auto flex justify-center py-3 px-4 border border-primary rounded-md shadow-sm text-sm font-medium text-primary bg-white hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                >
+                  Adicionar Outro Aluno
+                </button>
+                <button
+                  type="submit"
+                  id="finish-btn"
+                  class="w-full sm:w-auto flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-primary to-primary-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all"
+                >
+                  Concluir Cadastro
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Mensagem de feedback -->
+        <div id="feedback-message" class="mt-4 text-center"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const nextStepBtn = document.getElementById("next-step-btn");
+        const prevStepBtn = document.getElementById("prev-step-btn");
+        const form = document.getElementById("signup-form");
+        const feedbackMessage = document.getElementById("feedback-message");
+        const progressBar = document.getElementById("progress-bar");
+        const stepTitle = document.getElementById("step-title");
+
+        const responsavelNome = document.getElementById("responsavel-nome");
+        const responsavelEmail = document.getElementById("responsavel-email");
+        const responsavelSenha = document.getElementById("responsavel-senha");
+        const responsavelConfirmaSenha = document.getElementById(
+          "responsavel-confirma-senha"
+        );
+        const termos = document.getElementById("termos");
+
+        const alunoFormFields = document.querySelectorAll(
+          "#step2 input, #step2 select"
+        );
+
+        const validateStep1 = () => {
+          clearFeedback();
+          if (responsavelNome.value.length < 3) {
+            showFeedback(
+              "O nome completo do responsável deve ter ao menos 3 caracteres.",
+              "error"
+            );
+            return false;
+          }
+
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(responsavelEmail.value)) {
+            showFeedback("Por favor, insira um e-mail válido.", "error");
+            return false;
+          }
+
+          const senhaRegex =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+          if (!senhaRegex.test(responsavelSenha.value)) {
+            showFeedback(
+              "A senha não atende aos requisitos de segurança.",
+              "error"
+            );
+            return false;
+          }
+
+          if (responsavelSenha.value !== responsavelConfirmaSenha.value) {
+            showFeedback("As senhas não conferem.", "error");
+            return false;
+          }
+
+          if (!termos.checked) {
+            showFeedback(
+              "Você deve concordar com os Termos de Uso e a Política de Privacidade.",
+              "error"
+            );
+            return false;
+          }
+
+          return true;
+        };
+
+        const validateStep2 = () => {
+          clearFeedback();
+          const alunoNome = document.getElementById("aluno-nome");
+          const alunoAno = document.getElementById("aluno-ano");
+          const alunoTdah = document.getElementById("aluno-tdah");
+
+          if (alunoNome.value.length < 3) {
+            showFeedback(
+              "O nome ou apelido do aluno deve ter ao menos 3 caracteres.",
+              "error"
+            );
+            return false;
+          }
+
+          if (!alunoAno.value) {
+            showFeedback("O ano escolar do aluno é obrigatório.", "error");
+            return false;
+          }
+
+          if (!alunoTdah.value) {
+            showFeedback("A seleção do tipo de TDAH é obrigatória.", "error");
+            return false;
+          }
+
+          return true;
+        };
+
+        nextStepBtn.addEventListener("click", () => {
+          if (validateStep1()) {
+            step1.classList.add("hidden");
+            step2.classList.remove("hidden");
+            progressBar.style.width = "100%";
+            stepTitle.textContent = "Etapa 2 de 2: Dados do Aluno";
+            showFeedback(
+              "Conta do responsável criada! Agora, cadastre o aluno.",
+              "success"
+            );
+          }
+        });
+
+        prevStepBtn.addEventListener("click", () => {
+          step2.classList.add("hidden");
+          step1.classList.remove("hidden");
+          progressBar.style.width = "50%";
+          stepTitle.textContent = "Etapa 1 de 2: Dados do Responsável";
+          clearFeedback();
+        });
+
+        const nascimentoInput = document.getElementById("aluno-nascimento");
+        nascimentoInput.addEventListener("input", (e) => {
+          let value = e.target.value.replace(/\D/g, "");
+          if (value.length > 8) value = value.slice(0, 8);
+          if (value.length > 4) {
+            value = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(
+              4
+            )}`;
+          } else if (value.length > 2) {
+            value = `${value.slice(0, 2)}/${value.slice(2)}`;
+          }
+          e.target.value = value;
+        });
+
+        const addAnotherStudentBtn = document.getElementById(
+          "add-another-student-btn"
+        );
+        addAnotherStudentBtn.addEventListener("click", () => {
+          if (validateStep2()) {
+            const alunoNomeValue = document.getElementById("aluno-nome").value;
+            showFeedback(
+              `Aluno(a) "${alunoNomeValue}" adicionado com sucesso! Preencha os dados para o próximo.`,
+              "success"
+            );
+            alunoFormFields.forEach((field) => {
+              if (field.tagName === "SELECT") {
+                field.selectedIndex = 0;
+              } else {
+                field.value = "";
+              }
+            });
+            document.getElementById("aluno-nome").focus();
+          }
+        });
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (validateStep2()) {
+            form.innerHTML = `<div class="text-center p-8">
+                      <svg class="mx-auto h-12 w-12 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <h2 class="mt-4 text-2xl font-bold text-slate-800">Cadastro Concluído!</h2>
+                      <p class="mt-2 text-slate-600">Seu cadastro e o perfil do aluno foram criados com sucesso. Você será redirecionado para a plataforma.</p>
+                      <a href="login.html" class="mt-6 inline-block w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-primary to-primary-dark text-white font-medium rounded-md shadow-sm hover:shadow-lg">Acessar Plataforma</a>
+                  </div>`;
+            stepTitle.textContent = "Concluído!";
+          }
+        });
+
+        const showFeedback = (message, type) => {
+          feedbackMessage.textContent = message;
+          feedbackMessage.className = `mt-4 text-center p-3 rounded-md text-sm font-medium ${
+            type === "error"
+              ? "bg-red-100 text-red-700"
+              : "bg-green-100 text-green-700"
+          }`;
+        };
+
+        const clearFeedback = () => {
+          feedbackMessage.textContent = "";
+          feedbackMessage.className = "mt-4 text-center";
+        };
+      });
+    </script>
+  </body>
+</html>
