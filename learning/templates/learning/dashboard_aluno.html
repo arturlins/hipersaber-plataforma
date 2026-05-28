@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Dashboard de Aluno</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%); min-height: 100vh; margin: 0; }
+    .logo-gradient { background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
+    .btn-gradient { background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%); }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-6 px-8">
+    <div class="w-full max-w-screen-lg flex items-center justify-between">
+      <a href="/dashboard/" class="text-3xl font-bold logo-gradient"><span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber</a>
+      <nav>
+        <div class="relative">
+          <button id="accountMenuBtn" class="flex items-center gap-2 px-8 py-3 rounded-full font-semibold shadow-sm focus:outline-none transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg" aria-haspopup="true" aria-expanded="false">
+            <span class="hidden sm:inline">Minha Conta</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.657 0 3.234.267 4.712.763M12 7a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </button>
+          <div id="accountMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg transition duration-200 opacity-0 pointer-events-none z-50" tabindex="-1">
+            <ul class="py-2">
+              <li><a href="/meus-dados/" class="block px-4 py-2 hover:bg-gray-100 transition">Meus Dados</a></li>
+              <li><a href="/dashboard/" class="block px-4 py-2 hover:bg-gray-100 transition">Mudar Perfil de Aluno</a></li>
+              <li><a href="/suporte/" class="block px-4 py-2 hover:bg-gray-100 transition">Suporte</a></li>
+              <li><hr class="my-1 border-gray-200" /></li>
+              <li><a href="/logout/" class="block px-4 py-2 text-[#ec4899] hover:bg-pink-50 transition">Sair</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 py-10 px-4 sm:px-8">
+    <div class="max-w-screen-lg mx-auto">
+      <h1 class="text-3xl font-bold mb-8 text-white">Dashboard de <span class="text-[#00f5d4]">{{ student.nickname }}</span></h1>
+      <section id="meus-cursos" class="mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-white">Meus Cursos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {% for item in progress %}
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg overflow-hidden flex flex-col">
+            {% if item.enrollment.course.thumbnail_url %}
+            <img src="{{ item.enrollment.course.thumbnail_url }}" alt="Capa do curso" class="w-full h-40 object-cover">
+            {% endif %}
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold text-[#2d3748] mb-2">{{ item.enrollment.course.title }}</h3>
+              <p class="text-[#4a5568] text-sm mb-4 flex-1">{{ item.enrollment.course.description }}</p>
+              <div class="mb-2">
+                <div class="flex justify-between text-sm font-medium text-[#4a5568] mb-1">
+                  <span>Progresso</span>
+                  <span class="font-bold text-[#3d35a8]">{{ item.percent }}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-[#564adc] h-2.5 rounded-full" style="width: {{ item.percent }}%"></div>
+                </div>
+              </div>
+              <a href="/curso/{{ item.enrollment.course.public_id }}/continuar/{{ student.public_id }}/" class="mt-4 w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">Continuar Curso</a>
+            </div>
+          </div>
+          {% empty %}{% endfor %}
+        </div>
+      </section>
+
+      <section id="cursos-disponiveis">
+        <h2 class="text-2xl font-bold mb-6 text-white">Cursos Disponíveis</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {% for course in available_courses %}
+          <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg overflow-hidden flex flex-col">
+            {% if course.thumbnail_url %}
+            <img src="{{ course.thumbnail_url }}" alt="Capa do curso {{ course.title }}" class="w-full h-40 object-cover">
+            {% endif %}
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold text-[#2d3748] mb-2">{{ course.title }}</h3>
+              <p class="text-[#4a5568] text-sm mb-4 flex-1">{{ course.description }}</p>
+              <a href="/curso/{{ course.public_id }}/detalhes/{{ student.public_id }}/" class="mt-4 w-full text-center inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg focus:outline-none">Ver detalhes</a>
+            </div>
+          </div>
+          {% empty %}
+          <div class="col-span-1 md:col-span-2 lg:col-span-3">
+            <div class="backdrop-blur-lg bg-white/10 rounded-2xl p-8 text-center border border-white/20">
+              <span class="text-5xl mb-4 block">🏆</span>
+              <p class="text-white/90 text-lg">Parabéns! <strong>{{ student.nickname }}</strong> já está em todos os cursos.</p>
+              <p class="text-white/70">Fique de olho, novos conteúdos chegam em breve!</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      <div class="mt-10 text-center">
+        <a href="/dashboard/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg focus:outline-none">Mudar perfil de aluno</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-6 px-8 mt-auto">© 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita</footer>
+  <script>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountMenu = document.getElementById('accountMenu');
+    document.addEventListener('click', (e) => {
+      if (accountMenuBtn && accountMenuBtn.contains(e.target)) {
+        accountMenu.classList.toggle('opacity-0');
+        accountMenu.classList.toggle('pointer-events-none');
+      } else if (accountMenu && !accountMenu.contains(e.target)) {
+        accountMenu.classList.add('opacity-0');
+        accountMenu.classList.add('pointer-events-none');
+      }
+    });
+  </script>
+</body>
+</html>

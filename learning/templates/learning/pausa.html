@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Pausa e Reflexão</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%); min-height: 100vh; margin: 0; }
+    .logo-gradient { background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-4 px-8">
+    <div class="w-full max-w-5xl flex items-center justify-center">
+      <a href="/dashboard/" class="text-3xl font-bold logo-gradient"><span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber</a>
+    </div>
+  </header>
+  <main class="flex-1 py-10 px-4 sm:px-8 flex flex-col justify-center items-center text-center">
+    <div class="w-full max-w-xl mx-auto">
+      <div id="fasePausa" class="backdrop-blur-lg bg-white/10 rounded-2xl shadow-lg p-8 sm:p-12 border border-white/20">
+        <div class="text-7xl mb-4">🏆</div>
+        <h1 class="text-3xl font-bold mb-4 text-white">Mandou bem, <span class="text-[#00f5d4]">{{ student.nickname }}</span>!</h1>
+        <p class="text-white/90 text-lg mb-6">Você completou mais uma lição! Que tal uma pequena pausa?</p>
+        <p class="text-white/70 mb-8">Sugerimos 5 minutos para descansar os olhos, esticar as pernas ou beber um pouco de água antes de continuar.</p>
+        <div class="text-5xl font-bold text-white mb-8" id="timer">05:00</div>
+        <a href="/licao/{{ next_lesson_public_id }}/{{ student.public_id }}/" id="btnContinuar" class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold shadow-lg bg-[#00f5d4] text-[#2d3748] transition-all duration-300 ease-in-out hover:bg-[#00f5d4]/80 hover:-translate-y-0.5 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#00f5d4] focus:ring-opacity-50">Vamos continuar!</a>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-4 px-8 mt-auto">© 2025 HiperSaber - Educação Inclusiva</footer>
+  <script>
+    const btnContinuar = document.getElementById('btnContinuar');
+    const timerDisplay = document.getElementById('timer');
+    let tempoRestante = 300;
+    function atualizarTimer() { const minutos = Math.floor(tempoRestante / 60); let segundos = tempoRestante % 60; segundos = segundos < 10 ? '0' + segundos : segundos; if (timerDisplay) { timerDisplay.textContent = `${minutos}:${segundos}`; } if (tempoRestante > 0) { tempoRestante--; } else { clearInterval(timerInterval); if (timerDisplay) { timerDisplay.textContent = "00:00"; } } }
+    const timerInterval = setInterval(atualizarTimer, 1000);
+    atualizarTimer();
+  </script>
+</body>
+</html>

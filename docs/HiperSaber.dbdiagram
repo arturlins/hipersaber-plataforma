@@ -1,0 +1,251 @@
+{
+  "version": "1.0.0",
+  "darkMode": true,
+  "gridEnabling": false,
+  "detailLevel": "All",
+  "tablePositions": [
+    {
+      "name": "User",
+      "schemaName": "public",
+      "x": 12,
+      "y": 546
+    },
+    {
+      "name": "Student",
+      "schemaName": "public",
+      "x": 373.395711798417,
+      "y": 546
+    },
+    {
+      "name": "Course",
+      "schemaName": "public",
+      "x": 1036.0589447021484,
+      "y": 546
+    },
+    {
+      "name": "Module",
+      "schemaName": "public",
+      "x": 1333.757210179379,
+      "y": 546
+    },
+    {
+      "name": "Lesson",
+      "schemaName": "public",
+      "x": 1634.398088957134,
+      "y": 546
+    },
+    {
+      "name": "Material",
+      "schemaName": "public",
+      "x": 2041.1260897987768,
+      "y": 323.87557180304293
+    },
+    {
+      "name": "Subtitle",
+      "schemaName": "public",
+      "x": 2041.1260897987768,
+      "y": 693.8074645996096
+    },
+    {
+      "name": "Enrollment",
+      "schemaName": "public",
+      "x": 747.5336440236945,
+      "y": 546
+    },
+    {
+      "name": "LessonProgress",
+      "schemaName": "public",
+      "x": 1040.5838470458984,
+      "y": 311.4682336104547
+    },
+    {
+      "name": "SupportTicket",
+      "schemaName": "public",
+      "x": 12.5068359375,
+      "y": 206.27373384174547
+    },
+    {
+      "name": "AdminLogs",
+      "schemaName": "public",
+      "x": 12.5068359375,
+      "y": 1006.6601233231395
+    }
+  ],
+  "tableGroupCollapseStates": [],
+  "stickyNoteLayouts": [],
+  "referencePaths": [
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "Student",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "User",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "user_id"
+      ],
+      "firstTableName": "SupportTicket",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "User",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": [
+        {
+          "x": 331.0456679494757,
+          "y": 318.27373384174547
+        },
+        {
+          "x": 331.0456679494757,
+          "y": 594
+        }
+      ]
+    },
+    {
+      "firstFieldNames": [
+        "course_id"
+      ],
+      "firstTableName": "Module",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "Course",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "module_id"
+      ],
+      "firstTableName": "Lesson",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "Module",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "lesson_id"
+      ],
+      "firstTableName": "Material",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "Lesson",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "lesson_id"
+      ],
+      "firstTableName": "Subtitle",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "Lesson",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "student_id"
+      ],
+      "firstTableName": "Enrollment",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "Student",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "course_id"
+      ],
+      "firstTableName": "Enrollment",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "Course",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": []
+    },
+    {
+      "firstFieldNames": [
+        "student_id"
+      ],
+      "firstTableName": "LessonProgress",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "Student",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": [
+        {
+          "x": 715.8925186960322,
+          "y": 423.4682336104547
+        },
+        {
+          "x": 715.8925186960322,
+          "y": 594
+        }
+      ]
+    },
+    {
+      "firstFieldNames": [
+        "lesson_id"
+      ],
+      "firstTableName": "LessonProgress",
+      "firstSchemaName": "public",
+      "firstRelation": "*",
+      "secondFieldNames": [
+        "id"
+      ],
+      "secondTableName": "Lesson",
+      "secondSchemaName": "public",
+      "secondRelation": "1",
+      "checkPoints": [
+        {
+          "x": 1614.398088957134,
+          "y": 455.4682336104547
+        }
+      ]
+    }
+  ]
+}

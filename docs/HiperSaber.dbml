@@ -1,0 +1,237 @@
+Project "HiperSaber" {
+  database_type: 'PostgreSQL'
+  Note: 'Modelagem para plataforma de ensino com Auditoria Desnormalizada.'
+}
+
+// ------------------------------------
+// ENUMS (Tipos Personalizados)
+// ------------------------------------
+
+Enum adhd_type_enum {
+  desatento
+  hiperativo_impulsivo
+  combinado
+  nao_informado
+}
+
+Enum school_year_enum {
+  ano_1
+  ano_2
+  ano_3
+  ano_4
+  ano_5
+  ano_6
+  ano_7
+  ano_8
+  ano_9
+}
+
+Enum lesson_type_enum {
+  video
+  text
+  quiz
+}
+
+Enum role_enum {
+  guardian  // Usuário padrão do site
+  admin     // Administrador de conteúdo
+  superuser // Administrador total
+}
+
+Enum ticket_status_enum {
+  novo
+  em_andamento
+  resolvido
+}
+
+
+// ------------------------------------
+// TABELAS PRINCIPAIS (Usuários)
+// ------------------------------------
+
+Table User {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  email varchar(200) [not null, unique]
+  password_hash varchar(255) [not null]
+  full_name varchar(300) [not null]
+  agreed_to_terms boolean [not null, default: false]
+  last_login timestamp
+  is_staff boolean [not null, default: false]
+  is_superuser boolean [not null, default: false]
+  role role_enum [not null, default: 'guardian']
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table Student {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  user_id bigint [not null, note: 'Ref: User.id']
+  nickname varchar(300) [not null]
+  birth_date date
+  school_year school_year_enum [not null]
+  adhd_type adhd_type_enum [not null, default: 'nao_informado']
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+// ------------------------------------
+// TABELAS DE CONTEÚDO (Cursos)
+// ------------------------------------
+
+Table Course {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  title varchar(255) [not null]
+  description text
+  thumbnail_url varchar(255)
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table Module {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  course_id bigint [not null]
+  title varchar(255) [not null]
+  module_order int [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  
+  Indexes {
+    (course_id, module_order) [unique]
+  }
+}
+
+Table Lesson {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  module_id bigint [not null]
+  title varchar(255) [not null]
+  lesson_type lesson_type_enum [not null]
+  content text
+  video_url varchar(255)
+  duration_in_seconds int
+  lesson_order int [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  
+  Indexes {
+    (module_id, lesson_order) [unique]
+  }
+}
+
+// ------------------------------------
+// TABELAS DE APOIO
+// ------------------------------------
+
+Table Material {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  lesson_id bigint [not null]
+  title varchar(255) [not null]
+  file_url varchar(255) [not null]
+  file_type varchar(50)
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table Subtitle {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  lesson_id bigint [not null]
+  language_code varchar(10) [not null]
+  file_url varchar(255) [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+// ------------------------------------
+// TABELAS DE INTERAÇÃO
+// ------------------------------------
+
+Table Enrollment {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  student_id bigint [not null]
+  course_id bigint [not null]
+  enrolled_at timestamp [default: `now()`]
+  completed_at timestamp
+  
+  Indexes {
+    (student_id, course_id) [unique]
+  }
+}
+
+Table LessonProgress {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  student_id bigint [not null]
+  lesson_id bigint [not null]
+  completed_at timestamp [default: `now()`]
+  
+  Indexes {
+    (student_id, lesson_id) [unique]
+  }
+}
+
+Table SupportTicket {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  user_id bigint [not null]
+  subject varchar(255) [not null]
+  message text [not null]
+  status ticket_status_enum [not null, default: 'novo']
+  created_at timestamp [default: `now()`]
+  resolved_at timestamp
+}
+
+
+// ------------------------------------
+// TABELAS DE ADMINISTRAÇÃO (ATUALIZADA)
+// ------------------------------------
+
+Table AdminLogs {
+  id bigserial [pk]
+  public_id uuid [not null, default: `gen_random_uuid()`, unique]
+  
+  // Identificação do Admin (SNAPSHOT)
+  // Sem relação direta (Ref) para permitir exclusão do User original
+  admin_internal_id bigint [note: 'ID que o usuário tinha no momento']
+  admin_public_id uuid [note: 'UUID que o usuário tinha no momento']
+  
+  admin_name varchar(300) [not null, note: 'Nome gravado no momento da ação (ex: postgres)']
+  admin_email varchar(200) [not null, note: 'Email gravado no momento da ação']
+
+  // Ação e Alvo
+  action varchar(255) [not null, note: 'Ex: INSERT, UPDATE, DELETE']
+  target_entity varchar(100) [note: 'Nome da tabela afetada (Ex: Student)']
+  target_internal_id bigint
+  target_public_id uuid
+
+  // Dados JSON
+  details_old jsonb [note: 'Dados antes (NULL se for INSERT)']
+  details_new jsonb [note: 'Dados depois (NULL se for DELETE)']
+  date timestamp [default: `now()`]
+  
+  Note: 'Tabela de auditoria independente (Snapshot), mantém histórico mesmo se usuário for deletado.'
+}
+
+// ------------------------------------
+// REFERÊNCIAS (Relationships)
+// ------------------------------------
+
+Ref: Student.user_id > User.id
+Ref: SupportTicket.user_id > User.id
+
+Ref: Module.course_id > Course.id
+Ref: Lesson.module_id > Module.id
+
+Ref: Material.lesson_id > Lesson.id
+Ref: Subtitle.lesson_id > Lesson.id
+
+Ref: Enrollment.student_id > Student.id
+Ref: Enrollment.course_id > Course.id
+Ref: LessonProgress.student_id > Student.id
+Ref: LessonProgress.lesson_id > Lesson.id

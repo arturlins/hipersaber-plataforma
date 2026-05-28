@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Adicionar Novo Aluno</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%); min-height: 100vh; margin: 0; }
+    .logo-gradient { background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; }
+    .btn-gradient { background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%); }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-6 px-8">
+    <div class="w-full max-w-screen-lg flex items-center justify-between">
+      <a href="/dashboard/" class="text-3xl font-bold logo-gradient">
+        <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+      </a>
+      <nav>
+        <div class="relative">
+          <button id="accountMenuBtn" class="flex items-center gap-2 px-8 py-3 rounded-full font-semibold shadow-sm focus:outline-none transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg" aria-haspopup="true" aria-expanded="false">
+            <span class="hidden sm:inline">Minha Conta</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 15c1.657 0 3.234.267 4.712.763M12 7a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </button>
+          <div id="accountMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg transition duration-200 opacity-0 pointer-events-none z-50" tabindex="-1">
+            <ul class="py-2">
+              <li><a href="/meus-dados/" class="block px-4 py-2 hover:bg-gray-100 transition">Meus Dados</a></li>
+              <li><a href="/dashboard/" class="block px-4 py-2 hover:bg-gray-100 transition">Mudar Perfil de Aluno</a></li>
+              <li><a href="/suporte/" class="block px-4 py-2 hover:bg-gray-100 transition">Suporte</a></li>
+              <li><hr class="my-1 border-gray-200" /></li>
+              <li><a href="/logout/" class="block px-4 py-2 text-[#ec4899] hover:bg-pink-50 transition">Sair</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 py-10 px-4 sm:px-8">
+    <div class="max-w-screen-lg mx-auto">
+      <h1 class="text-3xl font-bold mb-8 text-white">Adicionar Novo Aluno</h1>
+      <section id="rf001-cadastro-aluno">
+        <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8">
+          <form id="form-cadastro-aluno" method="post" action="{{ form_action|default:'/cadastro-aluno/' }}">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="md:col-span-2">
+                <label for="nome-aluno" class="block text-sm font-medium text-[#4a5568]">Nome ou apelido do Aluno</label>
+                <input type="text" id="nome-aluno" name="nome_aluno" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]" placeholder="Ex: João, Bia, Lucas P." value="{{ initial.nome_aluno|default:'' }}">
+                {% if errors.nome_aluno %}
+                <p class="text-red-600 text-sm mt-1">{{ errors.nome_aluno }}</p>
+                {% endif %}
+              </div>
+              <div>
+                <label for="ano-escolar" class="block text-sm font-medium text-[#4a5568]">Ano Escolar</label>
+                <select id="ano-escolar" name="ano_escolar" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+                  <option value="" disabled selected>Selecione o ano...</option>
+                  <option value="ano_1" {% if initial.ano_escolar == 'ano_1' %}selected{% endif %}>1º Ano (Ensino Fundamental)</option>
+                  <option value="ano_2" {% if initial.ano_escolar == 'ano_2' %}selected{% endif %}>2º Ano (Ensino Fundamental)</option>
+                  <option value="ano_3" {% if initial.ano_escolar == 'ano_3' %}selected{% endif %}>3º Ano (Ensino Fundamental)</option>
+                  <option value="ano_4" {% if initial.ano_escolar == 'ano_4' %}selected{% endif %}>4º Ano (Ensino Fundamental)</option>
+                  <option value="ano_5" {% if initial.ano_escolar == 'ano_5' %}selected{% endif %}>5º Ano (Ensino Fundamental)</option>
+                  <option value="ano_6" {% if initial.ano_escolar == 'ano_6' %}selected{% endif %}>6º Ano (Ensino Fundamental)</option>
+                  <option value="ano_7" {% if initial.ano_escolar == 'ano_7' %}selected{% endif %}>7º Ano (Ensino Fundamental)</option>
+                  <option value="ano_8" {% if initial.ano_escolar == 'ano_8' %}selected{% endif %}>8º Ano (Ensino Fundamental)</option>
+                  <option value="ano_9" {% if initial.ano_escolar == 'ano_9' %}selected{% endif %}>9º Ano (Ensino Fundamental)</option>
+                </select>
+                {% if errors.ano_escolar %}
+                <p class="text-red-600 text-sm mt-1">{{ errors.ano_escolar }}</p>
+                {% endif %}
+              </div>
+              <div>
+                <label for="data-nascimento" class="block text-sm font-medium text-[#4a5568]">Data de Nascimento</label>
+                <input type="date" id="data-nascimento" name="data_nascimento" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]" value="{{ initial.data_nascimento|default:'' }}">
+              </div>
+            </div>
+            <div class="mt-8">
+              <label class="block text-base font-medium text-[#2d3748]">Tipo do TDAH (Se souber)</label>
+              <fieldset class="mt-4 space-y-4">
+                <div class="relative flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div class="flex items-center h-5">
+                    <input id="tdah-desatento" name="tipo_tdah" type="radio" value="desatento" class="focus:ring-[#564adc] h-4 w-4 text-[#564adc] border-gray-300" {% if initial.tipo_tdah == 'desatento' %}checked{% endif %}>
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tdah-desatento" class="font-bold text-[#2d3748]">Predominantemente Desatento</label>
+                    <p class="text-[#4a5568] mt-1">Dificuldade principal em manter a concentração, com tendência a se distrair e perder detalhes.</p>
+                  </div>
+                </div>
+                {% if errors.tipo_tdah %}
+                <p class="text-red-600 text-sm mt-2">{{ errors.tipo_tdah }}</p>
+                {% endif %}
+                <div class="relative flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div class="flex items-center h-5">
+                    <input id="tdah-hiperativo" name="tipo_tdah" type="radio" value="hiperativo_impulsivo" class="focus:ring-[#564adc] h-4 w-4 text-[#564adc] border-gray-300" {% if initial.tipo_tdah == 'hiperativo_impulsivo' %}checked{% endif %}>
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tdah-hiperativo" class="font-bold text-[#2d3748]">Predominantemente Hiperativo/Impulsivo</label>
+                    <p class="text-[#4a5568] mt-1">Excesso de energia, inquietude e agitação. Dificuldade em permanecer parado e agir por impulso.</p>
+                  </div>
+                </div>
+                <div class="relative flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div class="flex items-center h-5">
+                    <input id="tdah-combinado" name="tipo_tdah" type="radio" value="combinado" class="focus:ring-[#564adc] h-4 w-4 text-[#564adc] border-gray-300" {% if initial.tipo_tdah == 'combinado' %}checked{% endif %}>
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tdah-combinado" class="font-bold text-[#2d3748]">Combinado</label>
+                    <p class="text-[#4a5568] mt-1">Apresenta uma combinação de sintomas dos tipos desatento e hiperativo.</p>
+                  </div>
+                </div>
+                <div class="relative flex items-start p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div class="flex items-center h-5">
+                    <input id="tdah-nao-sei" name="tipo_tdah" type="radio" value="nao_informado" class="focus:ring-[#564adc] h-4 w-4 text-[#564adc] border-gray-300" {% if initial.tipo_tdah == 'nao_informado' %}checked{% endif %}>
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="tdah-nao-sei" class="font-bold text-[#2d3748]">Não sei informar / Prefiro não dizer</label>
+                    <p class="text-[#4a5568] mt-1">Essa informação poderá ser modificada no futuro, no painel do usuário.</p>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-200 flex flex-col-reverse sm:flex-row-reverse sm:justify-start gap-4">
+              {% if is_edit %}
+              <button type="submit" name="action" value="salvar" class="w-full sm:w-auto text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">Salvar alterações</button>
+              {% else %}
+              <button type="submit" name="action" value="concluir" class="w-full sm:w-auto text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">Concluir cadastro</button>
+              <button type="submit" name="action" value="adicionar_outro" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                Salvar e Adicionar Outro
+              </button>
+              {% endif %}
+            </div>
+            {% if success_message %}
+              <div class="mt-4 text-center p-3 rounded-md text-sm font-medium bg-green-100 text-green-700">{{ success_message }}</div>
+            {% endif %}
+          </form>
+        </div>
+      </section>
+      <div class="mt-8 text-center">
+        <a href="/dashboard/" class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm bg-[#ec4899] text-white border-2 border-transparent hover:bg-pink-700 hover:-translate-y-0.5 hover:shadow-lg">Cancelar</a>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-6 px-8 mt-auto">© 2025 HiperSaber - Educação Inclusiva | Plataforma 100% gratuita</footer>
+  <script>
+    const accountMenuBtn = document.getElementById('accountMenuBtn');
+    const accountMenu = document.getElementById('accountMenu');
+    document.addEventListener('click', (e) => {
+      if (accountMenuBtn && accountMenuBtn.contains(e.target)) {
+        accountMenu.classList.toggle('opacity-0');
+        accountMenu.classList.toggle('pointer-events-none');
+      } else if (accountMenu && !accountMenu.contains(e.target)) {
+        accountMenu.classList.add('opacity-0');
+        accountMenu.classList.add('pointer-events-none');
+      }
+    });
+  </script>
+</body>
+</html>

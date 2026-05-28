@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Redefinir Senha</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco)
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8 flex flex-col justify-center items-center">
+    
+    <!-- Logo -->
+    <div class="text-center mb-6">
+      <!-- CORREÇÃO: Removido 'logo-gradient' e adicionado 'text-white' para visibilidade -->
+      <a href="#rf002-login" class="text-4xl font-bold text-white inline-block" title="Voltar à página inicial">
+        <span style="margin-right:4px;">🚀</span> HiperSaber
+      </a>
+    </div>
+
+    <!-- Card de Redefinição (RF003 - Passo 8) -->
+    <div class="w-full max-w-md mx-auto">
+      
+      <!-- Formulário de Redefinição -->
+      <section class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8">
+        <h1 class="text-2xl font-bold text-center text-[#2d3748] mb-4">Crie sua Nova Senha</h1>
+        <p class="text-center text-[#4a5568] mb-6">Por favor, digite sua nova senha. Lembre-se de criar uma senha forte.</p>
+        
+        <form id="form-redefinir" class="space-y-4">
+          <div>
+            <label for="nova-senha" class="block text-sm font-medium text-[#4a5568]">Nova Senha</label>
+            <input type="password" id="nova-senha" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+            <p class="mt-1 text-xs text-gray-500">Mín. 8 caracteres, com maiúscula, minúscula, número e símbolo (@#$%&*).</p>
+            <!-- Exemplo de Erro (FA010): 
+            <p class="text-red-600 text-sm mt-1">A senha não atende aos requisitos.</p> 
+            -->
+          </div>
+
+          <div>
+            <label for="confirma-nova-senha" class="block text-sm font-medium text-[#4a5568]">Confirme a Nova Senha</label>
+            <input type="password" id="confirma-nova-senha" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+            <!-- Exemplo de Erro (FA009): 
+            <p class="text-red-600 text-sm mt-1">As senhas não conferem.</p> 
+            -->
+          </div>
+          
+          <button type="submit" class="w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg">
+            Salvar Nova Senha
+          </button>
+        </form>
+      </section>
+
+      <!-- Exemplo de Erro (FA008 - Link Expirado) - Oculta o formulário e mostra isso -->
+      <!-- 
+      <section class="hidden backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8 text-center">
+        <div class="text-5xl mb-4">🚫</div>
+        <h1 class="text-2xl font-bold text-[#2d3748] mb-4">Link Inválido</h1>
+        <p class="text-[#4a5568]">
+          Este link de redefinição é inválido ou expirou. Por favor, solicite uma nova redefinição.
+        </p>
+      </section>
+      -->
+      
+      <!-- Link para Voltar ao Login -->
+      <div class="mt-6 text-center">
+        <a href="#rf002-login" class="text-sm text-white/90 hover:text-white font-medium">
+          &larr; Voltar para o Login
+        </a>
+      </div>
+      
+    </div>
+  </main>
+</body>
+</html>

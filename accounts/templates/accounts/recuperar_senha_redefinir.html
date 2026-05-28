@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Redefinir Senha</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen" style="background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);">
+  <main class="flex-1 py-10 px-4 sm:px-8 flex flex-col justify-center items-center">
+    <div class="text-center mb-6">
+      <a href="/dashboard/" class="text-4xl font-bold text-white inline-block"><span style="margin-right:4px;">🚀</span> HiperSaber</a>
+    </div>
+    <div class="w-full max-w-md mx-auto">
+      {% if invalid_token %}
+      <section class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8 text-center">
+        <div class="text-5xl mb-4">🚫</div>
+        <h1 class="text-2xl font-bold text-[#2d3748] mb-4">Link Inválido</h1>
+        <p class="text-[#4a5568]">Este link de redefinição é inválido ou expirou. Por favor, solicite uma nova redefinição.</p>
+      </section>
+      {% else %}
+      <section class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-8">
+        <h1 class="text-2xl font-bold text-center text-[#2d3748] mb-4">Crie sua Nova Senha</h1>
+        <p class="text-center text-[#4a5568] mb-6">Por favor, digite sua nova senha.</p>
+        <form method="post" action="">
+          {% csrf_token %}
+          <div>
+            <label for="nova-senha" class="block text-sm font-medium text-[#4a5568]">Nova Senha</label>
+            <input type="password" id="nova-senha" name="new_password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+            {% if error_password %}<p class="text-red-600 text-sm mt-1">{{ error_password }}</p>{% endif %}
+            <p class="mt-1 text-xs text-gray-500">Mín. 8 caracteres, com maiúscula, minúscula, número e símbolo (@#$%&*).</p>
+          </div>
+          <div>
+            <label for="confirma-nova-senha" class="block text-sm font-medium text-[#4a5568]">Confirme a Nova Senha</label>
+            <input type="password" id="confirma-nova-senha" name="confirm_password" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#564adc] focus:ring-[#564adc]">
+            {% if error_confirm %}<p class="text-red-600 text-sm mt-1">{{ error_confirm }}</p>{% endif %}
+          </div>
+          <button type="submit" class="w-full text-center px-6 py-3 rounded-full font-semibold shadow-sm transition btn-gradient text-white border-2 border-transparent hover:-translate-y-0.5 hover:shadow-lg" style="background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);">Salvar Nova Senha</button>
+        </form>
+      </section>
+      {% endif %}
+      <div class="mt-6 text-center"><a href="/login/" class="text-sm text-white/90 hover:text-white font-medium">&larr; Voltar para o Login</a></div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Pausa e Reflexão</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    /* Paleta de Cores HiperSaber (Comentário)
+      Primária: #564adc (Hiper-Roxo), #3d35a8 (Roxo-Escuro)
+      Acentos:
+      - #00f5d4 (Turquesa-Foco) -> Usado para botões de ação primária no Modo Foco
+    */
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho MODO FOCO (Livre de Distrações) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-4 px-8">
+    <div class="w-full max-w-5xl flex items-center justify-center">
+      <!-- O logo é a única âncora, mas aqui não é clicável para manter o foco na pausa -->
+      <span class="text-3xl font-bold logo-gradient">
+        <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+      </span>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8 flex flex-col justify-center items-center text-center">
+    <div class="w-full max-w-xl mx-auto">
+
+      <!-- 
+        =============================================================
+        FASE 1: PAUSA (RF026 - Passo 2)
+        Visível por padrão
+        =============================================================
+      -->
+      <div id="fasePausa" class="backdrop-blur-lg bg-white/10 rounded-2xl shadow-lg p-8 sm:p-12 border border-white/20">
+        <!-- Ícone de Troféu -->
+        <div class="text-7xl mb-4">🏆</div>
+
+        <!-- Mensagem de Pausa -->
+        <h1 class="text-3xl font-bold mb-4 text-white">
+          Mandou bem, <span class="text-[#00f5d4]">João</span>!
+        </h1>
+        <p class="text-white/90 text-lg mb-6">
+          Você completou mais uma lição! Que tal uma pequena pausa?
+        </p>
+        <p class="text-white/70 mb-8">
+          Sugerimos 5 minutos para descansar os olhos, esticar as pernas ou beber um pouco de água antes de continuar.
+        </p>
+
+        <!-- Temporizador (RF026 - Passo 4) -->
+        <div class="text-5xl font-bold text-white mb-8" id="timer">05:00</div>
+        
+        <!-- Botão de Ação (RF026 - Passo 5) -->
+        <button id="btnContinuar" 
+                class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold shadow-lg 
+                       bg-[#00f5d4] text-[#2d3748] 
+                       transition-all duration-300 ease-in-out 
+                       hover:bg-[#00f5d4]/80 hover:-translate-y-0.5 hover:shadow-xl 
+                       focus:outline-none focus:ring-2 focus:ring-[#00f5d4] focus:ring-opacity-50">
+          Vamos continuar!
+        </button>
+      </div>
+
+      <!-- 
+        =============================================================
+        FASE 2: REFLEXÃO (RF026 - Passo 6)
+        Oculta por padrão (classe 'hidden')
+        =============================================================
+      -->
+      <div id="faseReflexao" class="hidden backdrop-blur-lg bg-white/10 rounded-2xl shadow-lg p-8 sm:p-12 border border-white/20">
+        <!-- Ícone de Lâmpada (Reflexão) -->
+        <div class="text-7xl mb-4">💡</div>
+
+        <!-- Mensagem de Reflexão -->
+        <h1 class="text-3xl font-bold mb-4 text-white">
+          Vamos lá!
+        </h1>
+        <p class="text-white/90 text-lg mb-6">
+          Antes de começar a próxima lição, que tal pensar um minutinho sobre o que você acabou de aprender?
+        </p>
+        <p class="text-white/70 mb-8">
+          Tente explicar em voz alta (para você mesmo ou para quem está com você) o que você mais achou interessante na última aula. Pensar sobre o que aprendemos ajuda a guardar na memória!
+        </p>
+
+        <!-- Botão de Ação (RF026 - Passo 8) -->
+        <a href="#rf024-proxima" 
+           class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full font-bold shadow-lg 
+                  bg-[#00f5d4] text-[#2d3748] 
+                  transition-all duration-300 ease-in-out 
+                  hover:bg-[#00f5d4]/80 hover:-translate-y-0.5 hover:shadow-xl 
+                  focus:outline-none focus:ring-2 focus:ring-[#00f5d4] focus:ring-opacity-50">
+          Iniciar Próxima Lição
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé MODO FOCO (Mínimo) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-4 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva
+  </footer>
+
+  <!-- Script para Pausa / Reflexão e Timer -->
+  <script>
+    const fasePausa = document.getElementById('fasePausa');
+    const faseReflexao = document.getElementById('faseReflexao');
+    const btnContinuar = document.getElementById('btnContinuar');
+    const timerDisplay = document.getElementById('timer');
+
+    // (RF026 - Passo 5) Troca da Fase 1 para a Fase 2
+    if (btnContinuar) {
+      btnContinuar.addEventListener('click', () => {
+        fasePausa.classList.add('hidden');
+        faseReflexao.classList.remove('hidden');
+        // Para o timer se ele ainda estiver rodando
+        clearInterval(timerInterval); 
+      });
+    }
+
+    // (RF026 - Passo 4) Lógica do Temporizador
+    let tempoRestante = 300; // 5 minutos = 300 segundos
+    
+    function atualizarTimer() {
+      const minutos = Math.floor(tempoRestante / 60);
+      let segundos = tempoRestante % 60;
+      
+      // Formata os segundos para sempre terem dois dígitos (ex: 05)
+      segundos = segundos < 10 ? '0' + segundos : segundos;
+      
+      if (timerDisplay) {
+        timerDisplay.textContent = `${minutos}:${segundos}`;
+      }
+      
+      // Para o timer quando chegar a 0
+      if (tempoRestante > 0) {
+        tempoRestante--;
+      } else {
+        clearInterval(timerInterval);
+        if (timerDisplay) {
+          timerDisplay.textContent = "00:00";
+        }
+      }
+    }
+
+    // Inicia o timer
+    const timerInterval = setInterval(atualizarTimer, 1000);
+    // Chama uma vez no início para não esperar 1s
+    atualizarTimer(); 
+    
+  </script>
+</body>
+</html>

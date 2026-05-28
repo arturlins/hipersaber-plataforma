@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HiperSaber - Lição em Texto</title>
+  <!-- 
+    *** CORREÇÃO ***
+    Adicionado '?plugins=typography' para carregar o plugin 'prose' 
+    e corrigir o espaçamento do texto.
+  -->
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      min-height: 100vh;
+      margin: 0;
+    }
+    .logo-gradient {
+      background: linear-gradient(135deg, #564adc 0%, #3d35a8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    /* (RF023 - Passo 7)
+      Estilo de destaque para a frase que está sendo lida pelo TTS.
+      (Turquesa-Foco com texto Grafite)
+    */
+    .tts-highlight {
+      background-color: #00f5d4;
+      color: #2d3748;
+      border-radius: 6px;
+      padding: 0.15rem 0.4rem;
+      transition: all 0.2s ease-in-out;
+      display: inline; /* Destaque no fluxo do texto */
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  
+  <!-- Cabeçalho MODO FOCO (Livre de Distrações) -->
+  <header class="bg-white/95 shadow-lg flex items-center justify-center py-4 px-8">
+    <div class="w-full max-w-5xl flex items-center justify-between">
+      <a href="#rf021" title="Voltar ao Dashboard do Aluno">
+        <span class="text-3xl font-bold logo-gradient">
+          <span class="logo-gradient" style="margin-right:4px;">🚀</span> HiperSaber
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="flex-1 py-10 px-4 sm:px-8 flex justify-center">
+    <div class="w-full max-w-3xl mx-auto">
+      
+      <!-- 
+        *** CORREÇÃO ***
+        - Card alterado para 'bg-white/95' (fundo branco)
+        - Removida a borda desnecessária
+      -->
+      <div class="backdrop-blur-lg bg-white/95 rounded-2xl shadow-lg p-6 sm:p-10">
+        
+        <!-- 
+          *** CORREÇÃO ***
+          - Botão TTS ajustado para o estilo Secundário (vazado, roxo) 
+            para contraste com o card branco.
+        -->
+        <button id="btnToggleTTS"
+                class="mb-6 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-[#564adc] text-[#564adc] bg-white 
+                       transition-all duration-300 ease-in-out 
+                       hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg 
+                       focus:outline-none">
+          <svg id="ttsIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M20 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11.99 15.13a2.5 2.5 0 010-6.26" />
+          </svg>
+          <span id="ttsText">Ouvir o texto</span>
+        </button>
+        <p id="tts-error" class="hidden text-red-600 text-sm mb-6">Seu navegador não suporta a leitura em voz alta.</p>
+
+        <!-- 
+          *** CORREÇÃO ***
+          - 'prose-invert' e 'text-white/90' removidos.
+          - 'prose prose-lg' agora funciona (graças ao plugin) e define
+            o texto escuro e o espaçamento correto.
+        -->
+        <div id="lessonTextContent" class="prose prose-lg max-w-none text-[#2d3748]">
+          
+          <h1 class="tts-block">🧩 O que é um Número Primo?</h1>
+          <p class="tts-block">É um número que só tem dois divisores:</p>
+          <ul>
+            <li class="tts-block">O número 1.</li>
+            <li class="tts-block">Ele mesmo.</li>
+          </ul>
+          <p class="tts-block">(Pense: "Ele não gosta de dividir com mais ninguém!")</p>
+          
+          <h3 class="tts-block">👍 Exemplo Primo: 5</h3>
+          <p class="tts-block">
+            <!-- *** CORREÇÃO: Fórmulas em HTML *** -->
+            5 ÷ 1 = 5 (Funciona)<br>
+            5 ÷ 5 = 1 (Funciona)<br>
+            Não dá para dividir 5 por 2, 3 ou 4 (sem sobrar resto).
+            <br><strong>5 é PRIMO.</strong>
+          </p>
+          
+          <h3 class="tts-block">👎 Exemplo NÃO Primo: 6</h3>
+          <p class="tts-block">
+            <!-- *** CORREÇÃO: Fórmulas em HTML *** -->
+            6 ÷ 1 = 6 (Funciona)<br>
+            6 ÷ 6 = 1 (Funciona)<br>
+            ...Mas também: 6 ÷ 2 = 3 (Ops! Tem um divisor extra!)
+            <br><strong>6 NÃO é PRIMO.</strong>
+          </p>
+
+          <h3 class="tts-block">💡 Os Primeiros Primos</h3>
+          <p class="tts-block">
+            2, 3, 5, 7, 11...
+            <br>Lembrete: O 2 é o único número PAR que é primo. O 1 não conta como primo.
+          </p>
+        </div>
+      </div>
+
+      <!-- Botões de Navegação (Padrão de Lição) -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
+        <a href="#aula-anterior" 
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Lição Anterior
+        </a>
+        
+        <a href="#rf021" 
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+          </svg>
+          Meus Cursos
+        </a>
+
+        <a href="#proxima-aula" 
+           class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold shadow-sm border-2 border-white/80 text-white/90 bg-white/10 transition-all duration-300 ease-in-out hover:bg-[#00f5d4] hover:text-[#2d3748] hover:border-[#00f5d4] hover:-translate-y-0.5 hover:shadow-lg focus:outline-none">
+          Próxima Lição
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Rodapé MODO FOCO (Mínimo) -->
+  <footer class="bg-white/95 text-center text-gray-700 text-sm py-4 px-8 mt-auto">
+    © 2025 HiperSaber - Educação Inclusiva
+  </footer>
+
+  <!-- Script para Web Speech API (TTS) (RF023) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Verificação de suporte da API
+      if (!('speechSynthesis' in window)) {
+        document.getElementById('btnToggleTTS').classList.add('hidden');
+        document.getElementById('tts-error').classList.remove('hidden');
+        return;
+      }
+
+      // 2. Referências de Elementos
+      const btnToggleTTS = document.getElementById('btnToggleTTS');
+      const ttsText = document.getElementById('ttsText');
+      const ttsIcon = document.getElementById('ttsIcon');
+      const lessonContent = document.getElementById('lessonTextContent');
+      const textBlocks = lessonContent.querySelectorAll('.tts-block');
+      
+      const utterance = new SpeechSynthesisUtterance();
+      utterance.lang = 'pt-BR'; // Essencial para a pronúncia correta
+      utterance.rate = 0.9; // Um pouco mais lento para facilitar o acompanhamento
+      
+      let isSpeaking = false;
+      let charMap = [];
+      let currentHighlight = null;
+
+      // 3. (RF023 - Passo 7) Preparar o mapa de caracteres para o destaque
+      let cumulativeIndex = 0;
+      textBlocks.forEach((block) => {
+        // Texto limpo (o .textContent já ignora o HTML de 'br' e 'strong')
+        const cleanText = block.textContent; 
+        charMap.push({ element: block, index: cumulativeIndex });
+        cumulativeIndex += cleanText.length + 1; 
+      });
+      // Pega o texto limpo de todo o conteúdo
+      utterance.text = Array.from(textBlocks).map(block => block.textContent).join('\n');
+
+      // 4. (RF023 - Passo 7) Evento de Limite (destaca a frase)
+      utterance.onboundary = (event) => {
+        if (event.name !== 'sentence') return; 
+
+        const charIndex = event.charIndex;
+        let foundBlock = null;
+
+        // Encontra o bloco de texto correto no mapa
+        for (let i = charMap.length - 1; i >= 0; i--) {
+          if (charIndex >= charMap[i].index) {
+            foundBlock = charMap[i].element;
+            break;
+          }
+        }
+
+        // Remove destaque anterior e aplica o novo
+        if (currentHighlight) {
+          currentHighlight.classList.remove('tts-highlight');
+        }
+        if (foundBlock) {
+          foundBlock.classList.add('tts-highlight');
+          currentHighlight = foundBlock;
+        }
+      };
+
+      // 5. Evento de Fim da Fala (limpa tudo)
+      utterance.onend = () => {
+        if (currentHighlight) {
+          currentHighlight.classList.remove('tts-highlight');
+        }
+        currentHighlight = null;
+        isSpeaking = false;
+        updateButtonUI(false);
+      };
+
+      // 6. Atualiza a UI do Botão
+      const updateButtonUI = (speaking) => {
+        if (speaking) {
+          // (RF023 - Passo 6)
+          ttsText.textContent = 'Pausar Leitura';
+          ttsIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />`;
+        } else {
+          // (RF023 - Passo 9)
+          ttsText.textContent = 'Ouvir o texto';
+          ttsIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M20 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M11.99 15.13a2.5 2.5 0 010-6.26" />`;
+        }
+      };
+
+      // 7. (RF023 - Passo 4 e 8) Lógica de Clique
+      btnToggleTTS.addEventListener('click', () => {
+        if (isSpeaking) {
+          // (RF023 - Passo 8)
+          speechSynthesis.cancel(); // 'cancel()' aciona o 'onend'
+        } else {
+          // (RF023 - Passo 5)
+          // Garante que o estado seja limpo se a fala foi cancelada de outra forma
+          speechSynthesis.cancel(); 
+          isSpeaking = true;
+          updateButtonUI(true);
+          speechSynthesis.speak(utterance);
+        }
+      });
+      
+      // 8. Limpa a fala se o usuário sair da página
+      window.addEventListener('beforeunload', () => {
+        speechSynthesis.cancel();
+      });
+    });
+  </script>
+</body>
+</html>
